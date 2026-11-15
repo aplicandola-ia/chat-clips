@@ -1,0 +1,5 @@
+clips/
+*.live_chat.json
+chat.json
+*.mp4
+node_modules/
