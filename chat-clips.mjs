@@ -113,6 +113,10 @@ function median(xs) {
 // Collapse "siiii", "JAJAJA", "100" variants so repeated votes look identical.
 const norm = (s) => s.toLowerCase().replace(/\d+/g, "#").replace(/(.)\1+/g, "$1").replace(/[^\p{L}#]/gu, "");
 
+// Chat text is written by strangers: drop control characters (terminal escape sequences) and
+// bidi overrides before it is printed or saved.
+const clean = (s) => s.replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/g, "");
+
 function scoreWindows(msgs, o) {
   // Windows start at the first message, not at 0: a chat downloaded from the middle of a VOD
   // (TwitchDownloaderCLI -b/-e) must not count the hours before it as silence.
@@ -131,7 +135,7 @@ function scoreWindows(msgs, o) {
     if (reacting) w.reactors.add(m.user);
     const key = norm(m.text);
     if (key && !reacting) w.words.set(key, (w.words.get(key) || 0) + 1);
-    if (w.sample.length < 6 && m.text) w.sample.push(m.text.slice(0, 40));
+    if (w.sample.length < 6 && m.text) w.sample.push(clean(m.text).slice(0, 40));
   }
   for (const w of wins) {
     const people = w.people.size;
