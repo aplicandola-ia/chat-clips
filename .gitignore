@@ -23,3 +23,13 @@ clips_*/
 # Local runtime and editor files
 node_modules/
 .DS_Store
+
+# Desktop app build output
+dist/
+src-tauri/target/
+src-tauri/gen/
+src-tauri/resources/runtime/node
+src-tauri/resources/runtime/node.exe
+
+# TypeScript incremental build metadata
+*.tsbuildinfo

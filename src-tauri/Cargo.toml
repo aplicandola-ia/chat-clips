@@ -1,0 +1,19 @@
+[package]
+name = "stream-clip-maker"
+version = "0.1.0"
+description = "Stream Clip Maker desktop application"
+authors = ["kathennn"]
+edition = "2021"
+
+[lib]
+name = "stream_clip_maker_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

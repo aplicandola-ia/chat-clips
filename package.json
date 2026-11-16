@@ -1,7 +1,7 @@
 {
   "name": "stream-clip-maker",
   "version": "0.1.0",
-  "description": "Find Twitch and YouTube stream highlights from chat reactions and create vertical video clips.",
+  "description": "Find stream highlights and create vertical clips with an easy desktop app.",
   "license": "MIT",
   "author": "kathennn",
   "type": "module",
@@ -15,6 +15,7 @@
     "cli.mjs",
     "chat-clips.mjs",
     "discover-twitch.mjs",
+    "desktop-engine.mjs",
     "discover-twitch.sh",
     "enhance-clip.sh",
     "make-clips.sh",
@@ -32,7 +33,11 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs && node --check cli.mjs",
+    "dev": "vite --host 0.0.0.0 --port 1420",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 1420",
+    "tauri": "tauri",
+    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check desktop-engine.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs && node --check cli.mjs",
     "test": "npm run check && node cli.mjs --help >/dev/null && node chat-clips.mjs --help >/dev/null"
   },
   "keywords": [
@@ -40,15 +45,11 @@
     "stream-clips",
     "twitch-clips",
     "twitch-highlights",
-    "twitch-vod",
-    "youtube-live-chat",
-    "stream-highlights",
-    "clip-maker",
-    "video-clips",
     "youtube-shorts",
     "vertical-video",
     "ffmpeg",
-    "termux"
+    "tauri",
+    "desktop-app"
   ],
   "repository": {
     "type": "git",
@@ -62,6 +63,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@clack/prompts": "^0.11.0"
+    "@clack/prompts": "^0.11.0",
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-dialog": "^2.0.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^5.6.0",
+    "vite": "^8.3.8"
   }
 }

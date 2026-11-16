@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 
-const root = path.dirname(new URL(import.meta.url).pathname);
+const root = process.env.STREAM_CLIP_CONFIG_DIR || path.dirname(fileURLToPath(import.meta.url));
 const tokenFile = path.join(root, 'youtube-token.json');
 const secretsFile = path.join(root, 'client_secrets.json');
 
