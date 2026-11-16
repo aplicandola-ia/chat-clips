@@ -13,7 +13,8 @@ Thanks for your interest in contributing! Bug reports, documentation improvement
 
 Requirements:
 
-- Node.js 18 or newer
+- Node.js 18 or newer for the CLI
+- Node.js 20.19+ or 22.12+ to install development dependencies and build the desktop app (Vite 8)
 - npm
 - Git
 - FFmpeg for features or tests that inspect, cut, or render video

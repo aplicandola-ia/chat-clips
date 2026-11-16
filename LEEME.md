@@ -42,7 +42,7 @@ Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x
     npm install
     node cli.mjs
 
-Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
+Instala Node.js 18+ para ejecutar la CLI, FFmpeg y las herramientas necesarias. Para compilar la app de escritorio desde el código fuente necesitas Node.js 20.19+ o 22.12+ (requisito de Vite 8). El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
 
 La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://aplicandola-ia.github.io/chat-clips/).
 
@@ -60,7 +60,7 @@ También se mantienen los comandos y opciones tradicionales para usuarios avanza
 
 ## Instalación
 
-Necesitas Node.js 18 o superior.
+La CLI necesita Node.js 18 o superior. Para desarrollar o compilar la app de escritorio también necesitas Node.js 20.19+ o 22.12+ (Vite 8).
 
 ```bash
 npm install --global stream-clip-maker
@@ -107,7 +107,7 @@ stream-clip-maker --help
 
 ## Requisitos
 
-- Node.js 18 o superior.
+- Node.js 18 o superior para la CLI. Para compilar la app de escritorio: Node.js 20.19+ o 22.12+.
 - FFmpeg para cortar y renderizar vídeo.
 - Descargas de VODs de Twitch: [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader).
 - Descargas de YouTube: [yt-dlp](https://github.com/yt-dlp/yt-dlp).

@@ -85,7 +85,7 @@ Linux: install DEB/RPM with your package manager. For AppImage, run chmod +x on 
     npm install
     node cli.mjs
 
-Install Node.js 18+, FFmpeg and the download tools needed by your workflow. The menu includes Search, Create, Enhance, Share, Setup & Help and Check. Rendering and publishing require confirmation; nothing is auto-published.
+Install Node.js 18+ for the CLI, FFmpeg and the download tools needed by your workflow. Building the desktop app from source requires Node.js 20.19+ or 22.12+ (Vite 8). The menu includes Search, Create, Enhance, Share, Setup & Help and Check. Rendering and publishing require confirmation; nothing is auto-published.
 
 The desktop app processes files locally. Install FFmpeg and whichever of yt-dlp / TwitchDownloaderCLI your workflow needs. See the [official download website](https://aplicandola-ia.github.io/chat-clips/).
 
@@ -105,7 +105,7 @@ Advanced users can keep using the original flags and scripts; for example, `stre
 
 ### 1. Install
 
-Requires **Node.js 18+**.
+The CLI requires **Node.js 18+**. Developing or building the desktop app also requires **Node.js 20.19+ or 22.12+** because it uses Vite 8.
 
 ```bash
 npm install --global stream-clip-maker
@@ -189,6 +189,8 @@ The `--vertical` option creates a **9:16** version with a blurred background. Au
 | **TwitchDownloaderCLI** | Downloading Twitch VOD chat / media |
 | **yt-dlp** | Downloading YouTube media and chat replay |
 | **Whisper.cpp** *(optional)* | Speech transcription for the Termux subtitle workflow |
+
+For desktop development and builds, use Node.js **20.19+ or 22.12+** (Vite 8 requirement). The CLI itself remains compatible with Node.js 18+.
 
 The core chat-analysis command has no third-party Node.js runtime dependencies. Downloading and rendering media requires the relevant external tools.
 

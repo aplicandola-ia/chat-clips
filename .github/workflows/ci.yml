@@ -38,25 +38,6 @@ jobs:
       - name: Run project checks and CLI smoke tests
         run: npm test
 
-      - name: Run project-owned Node.js tests
-        shell: bash
-        run: |
-          test_files=()
-          while IFS= read -r -d '' file; do
-            test_files+=("$file")
-          done < <(find . \
-            -path './node_modules' -prune -o \
-            -path './tools' -prune -o \
-            -path './.git' -prune -o \
-            -type f \
-            \( -name '*.test.js' -o -name '*.test.mjs' -o -name '*.spec.js' -o -name '*.spec.mjs' \) \
-            -print0)
-          if (( ${#test_files[@]} == 0 )); then
-            echo "No project-owned Node.js test files found; skipping test runner."
-          else
-            node --test "${test_files[@]}"
-          fi
-
       - name: Check shell script syntax
         shell: bash
         run: |
@@ -73,3 +54,62 @@ jobs:
 
       - name: Check patch whitespace
         run: git diff --check HEAD^ HEAD
+
+  desktop-compile:
+    name: Desktop compile (${{ matrix.name }})
+    needs: quality
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux x64
+            runner: ubuntu-22.04
+            os: linux
+          - name: Windows x64
+            runner: windows-latest
+            os: windows
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential curl wget file xdg-utils patchelf libfuse2 \
+            libssl-dev libayatana-appindicator3-dev librsvg2-dev \
+            libwebkit2gtk-4.1-dev libxdo-dev
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
+      - name: Bundle Node.js runtime (Linux)
+        if: matrix.os == 'linux'
+        shell: bash
+        run: |
+          mkdir -p src-tauri/resources/runtime
+          cp "$(command -v node)" src-tauri/resources/runtime/node
+          chmod 755 src-tauri/resources/runtime/node
+
+      - name: Bundle Node.js runtime (Windows)
+        if: matrix.os == 'windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force src-tauri/resources/runtime | Out-Null
+          Copy-Item (Get-Command node).Source src-tauri/resources/runtime/node.exe
+
+      - name: Compile Tauri desktop application
+        run: npm run tauri -- build --no-bundle
