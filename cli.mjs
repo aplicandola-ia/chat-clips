@@ -52,7 +52,7 @@ function launch(args, label) {
 async function searchStreams() {
   loadEnvFile();
   if (!process.env.TWITCH_CLIENT_ID || !process.env.TWITCH_CLIENT_SECRET) {
-    note("Open Setup & Help → Connect Twitch. Add your Twitch app keys to the .env file in the project folder, then return here. Never paste your secret into chat.", "Twitch is not connected yet");
+    note("Open Setup & Help → Connect Twitch. Add your Twitch app keys to config/private/.env, then return here. Never paste your secret into chat.", "Twitch is not connected yet");
     return;
   }
   const topic = await askText("What game or category should we search for?", "GTA 6", (v) => v.trim() ? undefined : "Enter a game or category.");

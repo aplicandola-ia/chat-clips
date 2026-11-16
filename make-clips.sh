@@ -33,13 +33,24 @@ done
 [ -x "$REPO/enhance-clip.sh" ] || { echo "Falta enhance-clip.sh"; exit 3; }
 
 mkdir -p "$CHAT_DIR" "$OUT"
-rm -f "$OUT"/*.mp4 "$OUT"/*.srt
+shopt -s dotglob
+if compgen -G "$OUT/*" >/dev/null; then
+  echo "La carpeta de salida ya contiene archivos: $OUT"
+  echo "No se sobrescribirá ni eliminará ningún resultado anterior. Elige otra carpeta o mueve los archivos manualmente."
+  exit 7
+fi
+shopt -u dotglob
 
 CHAT_WAS_DOWNLOADED=0
 if [ -s "$CHAT" ]; then
   echo "[1/4] Usando chat ya descargado: $CHAT"
 else
   echo "[1/4] Descargando el chat del VOD $ID..."
+  if [ -e "$PROOT_ROOT/$CHAT_NAME" ]; then
+    echo "Ya existe un chat temporal en Debian: $PROOT_ROOT/$CHAT_NAME"
+    echo "No se sobrescribirá. Revísalo o muévelo manualmente antes de continuar."
+    exit 7
+  fi
   proot-distro login debian -- "$TDCLI" chatdownload --id "$ID" -o "$CHAT_NAME"
   if [ ! -s "$PROOT_ROOT/$CHAT_NAME" ]; then
     echo "No aparece el chat descargado en Debian: $PROOT_ROOT/$CHAT_NAME"

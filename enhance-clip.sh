@@ -33,13 +33,21 @@ SRT="$DIR/$STEM.srt"
 TITLEFILE="$DIR/$STEM.title.txt"
 OUTPUT="$DIR/${STEM}_final.mp4"
 
+for file in "$OUTPUT" "$SRT" "$WAV" "$TITLEFILE"; do
+  if [ -e "$file" ]; then
+    echo "No se sobrescribirá un archivo existente: $file"
+    echo "Múevelo o renombralo manualmente antes de volver a intentarlo."
+    exit 7
+  fi
+done
+
 if [ -z "$TITLE" ]; then
   TITLE="MOMENTO DESTACADO"
 fi
 printf '%s\n' "$TITLE" > "$TITLEFILE"
 
 echo "[1/3] Extrayendo audio para transcribir..."
-ffmpeg -hide_banner -loglevel error -y -i "$INPUT" -vn -ac 1 -ar 16000 -c:a pcm_s16le "$WAV"
+ffmpeg -hide_banner -loglevel error -n -i "$INPUT" -vn -ac 1 -ar 16000 -c:a pcm_s16le "$WAV"
 
 echo "[2/3] Generando subtítulos en español con Whisper..."
 "$WHISPER" -m "$MODEL" -f "$WAV" -l es -osrt -of "$DIR/$STEM"
@@ -51,7 +59,7 @@ fi
 
 echo "[3/3] Incrustando título y subtítulos..."
 cd "$DIR"
-ffmpeg -hide_banner -y -i "$FILE" \
+ffmpeg -hide_banner -n -i "$FILE" \
   -vf "drawtext=fontfile=/system/fonts/Roboto-Bold.ttf:textfile='$STEM.title.txt':fontcolor=white:fontsize=48:box=1:boxcolor=black@0.55:boxborderw=18:x=(w-text_w)/2:y=70,subtitles='$STEM.srt':force_style='FontName=Roboto,FontSize=17,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=2,Shadow=1,Alignment=2,MarginV=180'" \
   -c:v libx264 -preset veryfast -crf 21 -c:a copy "$OUTPUT"
 

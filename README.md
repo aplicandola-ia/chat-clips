@@ -210,10 +210,11 @@ These helpers require additional local tools and configuration. They are not a h
 ### Twitch discovery setup
 
 1. Create an application in the [Twitch Developer Console](https://dev.twitch.tv/console/apps).
-2. Copy `.env.example` to `.env`.
-3. Set `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET` in `.env`.
-4. Add creator logins you have permission to edit to `allowedCreators` in `rules.json`.
-5. Run the discovery script from your repository checkout:
+2. Create `config/private/` if it does not exist.
+3. Copy `.env.example` to `config/private/.env`.
+4. Set `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET` in `config/private/.env`.
+5. Add creator logins you have permission to edit to `allowedCreators` in `rules.json`.
+6. Run the discovery script from your repository checkout:
 
 ```bash
 ./discover-twitch.sh "GTA 6"

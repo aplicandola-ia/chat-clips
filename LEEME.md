@@ -145,9 +145,10 @@ Estos scripts están diseñados para el entorno Termux del proyecto y requieren 
 ### Configurar la búsqueda de Twitch
 
 1. Crea una aplicación en [Twitch Developer Console](https://dev.twitch.tv/console/apps).
-2. Copia `.env.example` a `.env` y completa `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET`.
-3. Añade en `allowedCreators` de `rules.json` los nombres de creadores cuyo contenido tienes permiso para editar.
-4. Ejecuta `./discover-twitch.sh "GTA 6"` desde una copia del repositorio.
+2. Crea la carpeta `config/private/` si todavía no existe.
+3. Copia `.env.example` a `config/private/.env` y completa `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET`.
+4. Añade en `allowedCreators` de `rules.json` los nombres de creadores cuyo contenido tienes permiso para editar.
+5. Ejecuta `./discover-twitch.sh "GTA 6"` desde una copia del repositorio.
 
 Los canales encontrados **no quedan autorizados automáticamente**. Solo los creadores incluidos expresamente en `allowedCreators` aparecen como autorizados. Encontrar un directo mediante la API de Twitch no concede permiso para reutilizar su contenido.
 

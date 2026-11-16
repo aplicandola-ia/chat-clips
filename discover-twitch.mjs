@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const API = "https://api.twitch.tv/helix";
 const CLIENT_ID = process.env.TWITCH_CLIENT_ID;
@@ -7,7 +9,7 @@ const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 const topic = process.argv.slice(2).join(" ").trim();
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
-  console.error("Faltan TWITCH_CLIENT_ID y TWITCH_CLIENT_SECRET. Configúralos en .env (no los compartas por el chat).");
+  console.error("Faltan TWITCH_CLIENT_ID y TWITCH_CLIENT_SECRET. Configúralos en config/private/.env (no los compartas por el chat).");
   process.exit(2);
 }
 if (!topic) {
@@ -119,8 +121,8 @@ async function main() {
     authorizationMode: rules.authorizationMode || "allowed_creators_only",
     note: "Encontrar un canal no da permiso para reutilizarlo. Solo los canales de allowedCreators (rules.json) salen como autorizados; confirma los derechos con cada creador antes de editar o publicar. La búsqueda incluye directos y VODs archivados.",
   };
-  const outputPath = process.env.STREAM_CLIP_DISCOVERY_OUT || new URL("./workspace/discovery/discovery.json", import.meta.url);
-  mkdirSync(new URL("./workspace/discovery/", import.meta.url), { recursive: true });
+  const outputPath = process.env.STREAM_CLIP_DISCOVERY_OUT || fileURLToPath(new URL("./workspace/discovery/discovery.json", import.meta.url));
+  mkdirSync(dirname(outputPath), { recursive: true });
   writeFileSync(outputPath, JSON.stringify(result, null, 2));
   console.log(JSON.stringify({
     topic, categories: result.categories.map(c => c.name),
