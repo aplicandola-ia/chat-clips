@@ -1,0 +1,25 @@
+# Local credentials and secrets
+.env
+.env.*
+!.env.example
+client_secrets.json
+client_secret*.json
+youtube-token.json
+
+# Downloaded chat, API results, and generated media
+*_chat.json
+discovery.json
+clips/
+clips_*/
+*.mp4
+*.mkv
+*.mov
+*.webm
+*.srt
+*.wav
+*.title.txt
+*.audio.wav
+
+# Local runtime and editor files
+node_modules/
+.DS_Store

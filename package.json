@@ -1,0 +1,61 @@
+{
+  "name": "stream-clip-maker",
+  "version": "0.1.0",
+  "description": "Find Twitch and YouTube stream highlights from chat reactions and create vertical video clips.",
+  "license": "MIT",
+  "author": "kathennn",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "stream-clip-maker": "./chat-clips.mjs",
+    "chat-clips": "./chat-clips.mjs"
+  },
+  "files": [
+    "chat-clips.mjs",
+    "discover-twitch.mjs",
+    "discover-twitch.sh",
+    "enhance-clip.sh",
+    "make-clips.sh",
+    "publish-short.sh",
+    "youtube-auth.mjs",
+    "youtube-upload.mjs",
+    "rules.json",
+    ".env.example",
+    "README.md",
+    "LEEME.md",
+    "WORKFLOW.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs",
+    "test": "npm run check && node chat-clips.mjs --help >/dev/null"
+  },
+  "keywords": [
+    "stream-clip-maker",
+    "stream-clips",
+    "twitch-clips",
+    "twitch-highlights",
+    "twitch-vod",
+    "youtube-live-chat",
+    "stream-highlights",
+    "clip-maker",
+    "video-clips",
+    "youtube-shorts",
+    "vertical-video",
+    "ffmpeg",
+    "termux"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kathennn/stream-clip-maker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kathennn/stream-clip-maker/issues"
+  },
+  "homepage": "https://github.com/kathennn/stream-clip-maker#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
