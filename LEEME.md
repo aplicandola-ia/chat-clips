@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="assets/stream-clip-maker-icon.png" alt="Stream Clip Maker app icon" width="144" />
   <img src="assets/stream-clip-maker-wordmark.png" alt="Stream Clip Maker" width="92%" />
 </div>
 
