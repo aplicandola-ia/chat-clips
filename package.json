@@ -9,8 +9,7 @@
     "node": ">=18"
   },
   "bin": {
-    "stream-clip-maker": "./chat-clips.mjs",
-    "chat-clips": "./chat-clips.mjs"
+    "stream-clip-maker": "./chat-clips.mjs"
   },
   "files": [
     "chat-clips.mjs",
