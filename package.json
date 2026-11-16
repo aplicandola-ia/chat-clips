@@ -1,0 +1,84 @@
+{
+  "name": "stream-clip-maker",
+  "version": "0.1.0",
+  "description": "Find stream highlights and create vertical clips with an easy desktop app.",
+  "license": "MIT",
+  "author": "Manuel (https://github.com/lecodev-26)",
+  "contributors": [
+    "Aplicando La IA (https://aplicandolaia.com)"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "stream-clip-maker": "./cli.mjs"
+  },
+  "files": [
+    "cli.mjs",
+    "chat-clips.mjs",
+    "discover-twitch.mjs",
+    "desktop-engine.mjs",
+    "discover-twitch.sh",
+    "enhance-clip.sh",
+    "make-clips.sh",
+    "publish-short.sh",
+    "youtube-auth.mjs",
+    "youtube-upload.mjs",
+    "assets/stream-clip-maker-wordmark.png",
+    "assets/stream-clip-maker-icon.png",
+    "assets/stream-clip-maker-banner.svg",
+    "rules.json",
+    ".env.example",
+    "README.md",
+    "LEEME.md",
+    "WORKFLOW.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 1420",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 1420",
+    "tauri": "tauri",
+    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check desktop-engine.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs && node --check cli.mjs",
+    "test": "npm run check && node cli.mjs --help >/dev/null && node chat-clips.mjs --help >/dev/null"
+  },
+  "keywords": [
+    "stream-clip-maker",
+    "stream-clips",
+    "twitch-clips",
+    "twitch-highlights",
+    "youtube-shorts",
+    "vertical-video",
+    "ffmpeg",
+    "tauri",
+    "desktop-app"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aplicandola-ia/chat-clips.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aplicandola-ia/chat-clips/issues"
+  },
+  "homepage": "https://aplicandola-ia.github.io/chat-clips/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-dialog": "^2.0.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^5.6.0",
+    "vite": "^8.3.8"
+  }
+}

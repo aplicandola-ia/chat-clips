@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// chat-clips: find clip-worthy moments in a stream by looking at chat spikes.
+// Stream Clip Maker: find clip-worthy moments in a stream by looking at chat spikes.
 // Zero dependencies. Reads a TwitchDownloader chat JSON or a yt-dlp live_chat
 // replay (JSON Lines), scores 10-second windows by how many different people
 // react, and prints the top moments plus ready-to-run cut commands.
@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, basename } from "node:path";
 
-const HELP = `chat-clips <chat-file> [options]
+const HELP = `stream-clip-maker <chat-file> [options]
 
 Input: TwitchDownloader JSON (chatdownload) or yt-dlp *.live_chat.json
 
@@ -228,7 +228,7 @@ const quote = (a) => (/^[\w./:=@+-]+$/.test(a) ? a : `"${a.replaceAll('"', '\\"'
 
 function main() {
   const { file, opts } = parseArgs(process.argv.slice(2));
-  if (!file || opts.help) { process.stdout.write(HELP); process.exit(file ? 0 : 1); }
+  if (!file || opts.help) { process.stdout.write(HELP); process.exit(opts.help ? 0 : 1); }
   const msgs = loadChat(file);
   if (!msgs.length) throw new Error(`no chat messages found in ${basename(file)}`);
 
@@ -265,4 +265,4 @@ function main() {
   }
 }
 
-try { main(); } catch (e) { console.error(`chat-clips: ${e.message}`); process.exit(1); }
+try { main(); } catch (e) { console.error(`stream-clip-maker: ${e.message}`); process.exit(1); }

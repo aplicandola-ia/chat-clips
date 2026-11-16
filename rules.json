@@ -1,0 +1,19 @@
+{
+  "languagePolicy": "all",
+  "allowedCreators": [],
+  "minViewers": 25,
+  "maxStreamsPerScan": 50,
+  "maxClipsPerCreatorPerDay": 2,
+  "maxUploadsPerDay": 3,
+  "youtubePrivacy": "private",
+  "autoPublish": false,
+  "requireRightsConfirmation": true,
+  "minChatPeakRatio": 2.5,
+  "minUniqueReactors": 5,
+  "clipMinSeconds": 25,
+  "clipMaxSeconds": 60,
+  "maxVodChannelsPerScan": 20,
+  "maxVodsPerChannel": 5,
+  "authorizationMode": "allowed_creators_only",
+  "reviewRequiredBeforeUpload": true
+}
