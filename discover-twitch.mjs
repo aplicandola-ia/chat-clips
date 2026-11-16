@@ -116,8 +116,8 @@ async function main() {
     streams,
     totalVods: vods.length,
     vods,
-    authorizationMode: "editor_permission_confirmed_by_user",
-    note: "Los permisos de edición/publicación han sido confirmados por el usuario. La búsqueda incluye directos y VODs archivados; el descubrimiento de Twitch no determina por sí solo el estado de cada permiso.",
+    authorizationMode: rules.authorizationMode || "allowed_creators_only",
+    note: "Encontrar un canal no da permiso para reutilizarlo. Solo los canales de allowedCreators (rules.json) salen como autorizados; confirma los derechos con cada creador antes de editar o publicar. La búsqueda incluye directos y VODs archivados.",
   };
   const outputPath = process.env.STREAM_CLIP_DISCOVERY_OUT || new URL("./workspace/discovery/discovery.json", import.meta.url);
   mkdirSync(new URL("./workspace/discovery/", import.meta.url), { recursive: true });
