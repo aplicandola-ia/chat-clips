@@ -88,4 +88,3 @@ if [ "$CHAT_WAS_DOWNLOADED" -eq 1 ]; then
 fi
 echo "Terminado: $i clip(s) finales en $OUT y copias en Descargas."
 echo "Para publicar uno, usa: ./publish-short.sh "$OUT/archivo_final.mp4" "Título" "Descripción" "tags""
-

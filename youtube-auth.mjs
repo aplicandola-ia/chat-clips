@@ -15,7 +15,7 @@ const cfg = JSON.parse(fs.readFileSync(secretsPath, 'utf8')).installed;
 if (!cfg?.client_id || !cfg?.client_secret) throw new Error('JSON OAuth no válido: debe ser cliente Desktop app.');
 
 const state = crypto.randomBytes(24).toString('hex');
-let redirectUri = ''; 
+let redirectUri = '';
 const server = http.createServer(async (req, res) => {
   const u = new URL(req.url, 'http://127.0.0.1');
   if (u.pathname !== '/oauth2callback') {

@@ -43,4 +43,3 @@ A discovered Twitch channel is not automatically authorized for reuse. Never inf
 
 ## Troubleshooting
 Verify Node.js, FFmpeg, ffprobe, yt-dlp and TwitchDownloaderCLI. On Linux, distinguish missing WebKitGTK/font dependencies from app logic failures. On macOS, use the TUI, not unsupported .dmg installers. Ask for sanitized error output; never request secrets.
-
