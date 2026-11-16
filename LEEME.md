@@ -19,6 +19,8 @@ Stream Clip Maker analiza la actividad del chat para detectar momentos en los qu
 
 English: [README.md](README.md) · [Web oficial y descargas](https://aplicandola-ia.github.io/chat-clips/)
 
+> **¿Vienes del vídeo de Aplicando La IA?** Estás en el sitio correcto: chat-clips creció y ahora es Stream Clip Maker. `node chat-clips.mjs …` funciona igual que antes y la guía paso a paso sigue en [aplicandolaia.com](https://aplicandolaia.com/recursos/clips-gta6#chat-clips). Mira [Autores](#autores).
+
 ## Descargas de escritorio — v0.1.0
 
 Instaladores para Linux x64 y Windows x64. Los de la v0.1.0 los publicó kathennn en el [repositorio original](https://github.com/kathennn/stream-clip-maker); las próximas versiones saldrán de este.
@@ -175,6 +177,12 @@ pnpm run check
 pnpm test
 pnpm pack --dry-run
 ```
+
+## Autores
+
+- **[kathennn](https://github.com/kathennn)** creó Stream Clip Maker: el menú guiado de terminal, la app de escritorio, la búsqueda en Twitch, los subtítulos y el título, la subida privada a YouTube, la web y el plugin de ChatGPT. El proyecto nació en [kathennn/stream-clip-maker](https://github.com/kathennn/stream-clip-maker) y todo su historial está aquí.
+- **[lecodev-26](https://github.com/lecodev-26)** mejoró la experiencia del menú de terminal.
+- **[Aplicando La IA](https://aplicandolaia.com)** escribió el detector original de chat-clips (`chat-clips.mjs`), del que partió Stream Clip Maker, y mantiene este repositorio.
 
 ## Licencia
 

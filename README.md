@@ -27,6 +27,10 @@
   </p>
 </div>
 
+> **¿Vienes del vídeo de Aplicando La IA?** Estás en el sitio correcto: chat-clips ahora es Stream Clip Maker. `node chat-clips.mjs …` funciona igual que antes y la guía paso a paso sigue en [aplicandolaia.com](https://aplicandolaia.com/recursos/clips-gta6#chat-clips). En español: [LEEME.md](LEEME.md).
+>
+> **Came from the Aplicando La IA video?** chat-clips grew into Stream Clip Maker. `node chat-clips.mjs …` works exactly as before. See [Authors](#authors).
+
 ---
 
 ## The best moments are already in the chat.
@@ -254,6 +258,12 @@ pnpm pack --dry-run
 ## Contributing
 
 Bug reports, feature requests, and pull requests are welcome. Please include reproduction steps and relevant environment details, but never attach API keys, OAuth credentials, private chat logs, or copyrighted media you do not have permission to share.
+
+## Authors
+
+- **[kathennn](https://github.com/kathennn)** built Stream Clip Maker: the guided terminal menu, the desktop app, Twitch discovery, captions and title, private YouTube upload, the website and the ChatGPT plugin. The project started in [kathennn/stream-clip-maker](https://github.com/kathennn/stream-clip-maker) and its full history lives here.
+- **[lecodev-26](https://github.com/lecodev-26)** improved the guided terminal experience.
+- **[Aplicando La IA](https://aplicandolaia.com)** wrote the original chat-clips detector (`chat-clips.mjs`) that Stream Clip Maker started from, and maintains this repository.
 
 ## License
 

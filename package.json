@@ -4,6 +4,10 @@
   "description": "Find stream highlights and create vertical clips with an easy desktop app.",
   "license": "MIT",
   "author": "kathennn",
+  "contributors": [
+    "lecodev-26 (https://github.com/lecodev-26)",
+    "Aplicando La IA (https://aplicandolaia.com)"
+  ],
   "type": "module",
   "engines": {
     "node": ">=18"
