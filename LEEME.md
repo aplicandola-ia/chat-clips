@@ -17,7 +17,7 @@ Stream Clip Maker analiza la actividad del chat para detectar momentos en los qu
 
 **No necesita dependencias Node.js de terceros.** Para descargar y renderizar vídeo hacen falta herramientas externas.
 
-English: [README.md](README.md) · [Web oficial y descargas](https://aplicandola-ia.github.io/chat-clips/)
+English: [README.md](README.md) · [Web oficial y descargas](https://aplicandola-ia.github.io/stream-clip-maker/)
 
 > **¿Vienes del vídeo de Aplicando La IA?** Estás en el sitio correcto: chat-clips creció y ahora es Stream Clip Maker. `node chat-clips.mjs …` funciona igual que antes y la guía paso a paso sigue en [aplicandolaia.com](https://aplicandolaia.com/recursos/clips-gta6#chat-clips). Mira [Autores](#autores).
 
@@ -37,14 +37,14 @@ Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x
 
 **macOS:** esta versión no tiene instalador nativo compatible. Utiliza la TUI guiada desde una copia del repositorio:
 
-    git clone https://github.com/aplicandola-ia/chat-clips.git
-    cd chat-clips
+    git clone https://github.com/aplicandola-ia/stream-clip-maker.git
+    cd stream-clip-maker
     npm install
     node cli.mjs
 
 Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
 
-La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://aplicandola-ia.github.io/chat-clips/).
+La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://aplicandola-ia.github.io/stream-clip-maker/).
 
 ## Interfaz interactiva (TUI)
 

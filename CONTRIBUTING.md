@@ -4,7 +4,7 @@ Thanks for your interest in contributing! Bug reports, documentation improvement
 
 ## Before you start
 
-- Check the [open issues](https://github.com/aplicandola-ia/chat-clips/issues) to see whether the work is already planned.
+- Check the [open issues](https://github.com/aplicandola-ia/stream-clip-maker/issues) to see whether the work is already planned.
 - Issues labeled **good first issue** are intended as approachable starting points. The **help wanted** label marks work where contributions are especially welcome.
 - For a substantial change, open an issue first so we can agree on the approach before you spend time implementing it.
 - If you want to work on an issue, leave a comment so others know it is being handled. You do not need to wait for assignment unless the issue says otherwise.
@@ -21,8 +21,8 @@ Requirements:
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/aplicandola-ia/chat-clips.git
-cd chat-clips
+git clone https://github.com/aplicandola-ia/stream-clip-maker.git
+cd stream-clip-maker
 npm install
 ```
 
@@ -91,4 +91,4 @@ Be respectful, constructive, and welcoming. Assume good intent, explain disagree
 
 ## Questions?
 
-If you are unsure about an issue or implementation approach, ask in the relevant [GitHub issue](https://github.com/aplicandola-ia/chat-clips/issues). Thanks for helping make Stream Clip Maker better!
+If you are unsure about an issue or implementation approach, ask in the relevant [GitHub issue](https://github.com/aplicandola-ia/stream-clip-maker/issues). Thanks for helping make Stream Clip Maker better!

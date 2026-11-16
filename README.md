@@ -14,8 +14,8 @@
   <p>
     <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/v/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=npm" alt="npm version" /></a>
     <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/dm/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=downloads" alt="npm monthly downloads" /></a>
-    <a href="https://github.com/aplicandola-ia/chat-clips/stargazers"><img src="https://img.shields.io/github/stars/aplicandola-ia/chat-clips?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
-    <a href="https://github.com/aplicandola-ia/chat-clips/blob/main/LICENSE"><img src="https://img.shields.io/github/license/aplicandola-ia/chat-clips?style=for-the-badge" alt="MIT license" /></a>
+    <a href="https://github.com/aplicandola-ia/stream-clip-maker/stargazers"><img src="https://img.shields.io/github/stars/aplicandola-ia/stream-clip-maker?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
+    <a href="https://github.com/aplicandola-ia/stream-clip-maker/blob/main/LICENSE"><img src="https://img.shields.io/github/license/aplicandola-ia/stream-clip-maker?style=for-the-badge" alt="MIT license" /></a>
     <img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js 18 or newer" />
   </p>
 
@@ -23,9 +23,9 @@
     <a href="#quick-start">Quick start</a> ·
     <a href="#how-it-works">How it works</a> ·
     <a href="LEEME.md">Leer en español</a> ·
-    <a href="https://aplicandola-ia.github.io/chat-clips/">Website & downloads</a> ·
+    <a href="https://aplicandola-ia.github.io/stream-clip-maker/">Website & downloads</a> ·
     <a href="https://github.com/kathennn/stream-clip-maker/releases/tag/v0.1.0">Release v0.1.0</a> ·
-    <a href="https://github.com/aplicandola-ia/chat-clips/issues">Report a bug</a>
+    <a href="https://github.com/aplicandola-ia/stream-clip-maker/issues">Report a bug</a>
   </p>
 </div>
 
@@ -80,14 +80,14 @@ Linux: install DEB/RPM with your package manager. For AppImage, run chmod +x on 
 
 **macOS:** this release has no supported native desktop installer. Use the guided TUI from a source checkout:
 
-    git clone https://github.com/aplicandola-ia/chat-clips.git
-    cd chat-clips
+    git clone https://github.com/aplicandola-ia/stream-clip-maker.git
+    cd stream-clip-maker
     npm install
     node cli.mjs
 
 Install Node.js 18+, FFmpeg and the download tools needed by your workflow. The menu includes Search, Create, Enhance, Share, Setup & Help and Check. Rendering and publishing require confirmation; nothing is auto-published.
 
-The desktop app processes files locally. Install FFmpeg and whichever of yt-dlp / TwitchDownloaderCLI your workflow needs. See the [official download website](https://aplicandola-ia.github.io/chat-clips/).
+The desktop app processes files locally. Install FFmpeg and whichever of yt-dlp / TwitchDownloaderCLI your workflow needs. See the [official download website](https://aplicandola-ia.github.io/stream-clip-maker/).
 
 ## Interactive terminal interface
 
@@ -247,8 +247,8 @@ To use it with ChatGPT, download the ZIP and add it through Plugin Creator / the
 Clone the repository:
 
 ```bash
-git clone https://github.com/aplicandola-ia/chat-clips.git
-cd chat-clips
+git clone https://github.com/aplicandola-ia/stream-clip-maker.git
+cd stream-clip-maker
 npm test
 npm pack --dry-run
 ```
