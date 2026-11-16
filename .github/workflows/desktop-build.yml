@@ -27,7 +27,7 @@ jobs:
             node_arch: x64
             args: ""
           - name: macOS Apple Silicon
-            runner: macos-14
+            runner: macos-15
             os: macos
             node_arch: arm64
             rust_target: aarch64-apple-darwin
