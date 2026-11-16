@@ -28,18 +28,6 @@ jobs:
             runner: windows-latest
             os: windows
             args: ""
-          - name: macOS Apple Silicon
-            runner: macos-latest
-            os: macos
-            runtime_arch: arm64
-            rust_target: aarch64-apple-darwin
-            args: --target aarch64-apple-darwin
-          - name: macOS Intel
-            runner: macos-latest
-            os: macos
-            runtime_arch: x64
-            rust_target: x86_64-apple-darwin
-            args: --target x86_64-apple-darwin
 
     runs-on: ${{ matrix.runner }}
 
@@ -59,10 +47,6 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Add macOS target
-        if: matrix.os == 'macos'
-        run: rustup target add ${{ matrix.rust_target }}
-
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -71,25 +55,6 @@ jobs:
 
       - name: Install JavaScript dependencies
         run: npm ci
-
-      - name: Bundle Node.js runtime (macOS Apple Silicon)
-        if: matrix.os == 'macos' && matrix.runtime_arch == 'arm64'
-        shell: bash
-        run: |
-          mkdir -p src-tauri/resources/runtime
-          cp "$(command -v node)" src-tauri/resources/runtime/node
-          chmod 755 src-tauri/resources/runtime/node
-
-      - name: Bundle Node.js runtime (macOS Intel)
-        if: matrix.os == 'macos' && matrix.runtime_arch == 'x64'
-        shell: bash
-        run: |
-          NODE_VERSION="$(node -p "process.versions.node")"
-          curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-darwin-x64.tar.gz" -o /tmp/node-x64.tar.gz
-          tar -xzf /tmp/node-x64.tar.gz -C /tmp
-          mkdir -p src-tauri/resources/runtime
-          cp "/tmp/node-v${NODE_VERSION}-darwin-x64/bin/node" src-tauri/resources/runtime/node
-          chmod 755 src-tauri/resources/runtime/node
 
       - name: Bundle Node.js runtime (Linux)
         if: matrix.os == 'linux'
