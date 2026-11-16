@@ -19,6 +19,18 @@ Stream Clip Maker analiza la actividad del chat para detectar momentos en los qu
 
 English: [README.md](README.md)
 
+## Interfaz interactiva (TUI)
+
+Ejecuta el programa sin argumentos para abrir el menú guiado:
+
+```bash
+stream-clip-maker
+```
+
+Desde el menú puedes analizar chats, crear clips desde VODs de Twitch / URLs compatibles / vídeos locales, descubrir directos y añadir subtítulos y títulos. Antes de renderizar vídeos pide confirmación. Nunca publica vídeos automáticamente.
+
+También se mantienen los comandos y opciones tradicionales para usuarios avanzados.
+
 ## Instalación
 
 Necesitas Node.js 18 o superior.

@@ -58,6 +58,18 @@ A sudden flood of emotes. Everyone typing at once. A reaction spike you don't wa
 4. **Render vertical clips** with FFmpeg.
 5. **Review and share** only content you have permission to reuse.
 
+## Interactive terminal interface
+
+Run Stream Clip Maker without arguments to open the guided TUI:
+
+```bash
+stream-clip-maker
+```
+
+Choose an action from the menu and follow the prompts to analyze a chat, create clips from a Twitch VOD / supported URL / local video, discover Twitch streams, or add subtitles and a title to a vertical clip. The interface asks for confirmation before starting video rendering. It never publishes videos automatically.
+
+Advanced users can keep using the original flags and scripts; for example, `stream-clip-maker chat.json --vertical --top 5`.
+
 ## Quick start
 
 ### 1. Install
@@ -71,7 +83,7 @@ npm install --global stream-clip-maker
 Or run it without a global install:
 
 ```bash
-npx stream-clip-maker --help
+npx stream-clip-maker
 ```
 
 ### 2. Download a chat replay
@@ -116,7 +128,7 @@ You can also render from a local video:
 stream-clip-maker chat.json --video recording.mp4 --vertical --run --out clips
 ```
 
-See all available options:
+Open the guided interface with `stream-clip-maker`, or see advanced options with:
 
 ```bash
 stream-clip-maker --help

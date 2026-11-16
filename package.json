@@ -9,9 +9,10 @@
     "node": ">=18"
   },
   "bin": {
-    "stream-clip-maker": "./chat-clips.mjs"
+    "stream-clip-maker": "./cli.mjs"
   },
   "files": [
+    "cli.mjs",
     "chat-clips.mjs",
     "discover-twitch.mjs",
     "discover-twitch.sh",
@@ -31,8 +32,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs",
-    "test": "npm run check && node chat-clips.mjs --help >/dev/null"
+    "check": "node --check chat-clips.mjs && node --check discover-twitch.mjs && node --check youtube-auth.mjs && node --check youtube-upload.mjs && node --check cli.mjs",
+    "test": "npm run check && node cli.mjs --help >/dev/null && node chat-clips.mjs --help >/dev/null"
   },
   "keywords": [
     "stream-clip-maker",
@@ -59,5 +60,8 @@
   "homepage": "https://github.com/kathennn/stream-clip-maker#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0"
   }
 }
