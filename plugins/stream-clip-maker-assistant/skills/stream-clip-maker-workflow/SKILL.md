@@ -5,16 +5,16 @@ description: Use when users want to install, configure, operate or troubleshoot 
 
 # Stream Clip Maker workflow
 
-Official website: https://aplicandola-ia.github.io/chat-clips/
-Repository: https://github.com/aplicandola-ia/chat-clips
+Official website: https://aplicandola-ia.github.io/stream-clip-maker/
+Repository: https://github.com/aplicandola-ia/stream-clip-maker
 Release: https://github.com/kathennn/stream-clip-maker/releases/tag/v0.1.0
 
 ## Platform selection
 - Linux x64: DEB for Debian/Ubuntu, RPM for Fedora-family systems, AppImage for portable use.
 - Windows x64: MSI or EXE installer.
 - macOS: no native desktop installer is supported in v0.1.0. Guide users through the Node.js TUI:
-  git clone https://github.com/aplicandola-ia/chat-clips.git
-  cd chat-clips
+  git clone https://github.com/aplicandola-ia/stream-clip-maker.git
+  cd stream-clip-maker
   npm install
   node cli.mjs
 - Android: Termux is a separate CLI workflow, not a Tauri desktop app.

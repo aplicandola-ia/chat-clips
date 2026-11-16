@@ -56,12 +56,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aplicandola-ia/chat-clips.git"
+    "url": "git+https://github.com/aplicandola-ia/stream-clip-maker.git"
   },
   "bugs": {
-    "url": "https://github.com/aplicandola-ia/chat-clips/issues"
+    "url": "https://github.com/aplicandola-ia/stream-clip-maker/issues"
   },
-  "homepage": "https://aplicandola-ia.github.io/chat-clips/",
+  "homepage": "https://aplicandola-ia.github.io/stream-clip-maker/",
   "publishConfig": {
     "access": "public"
   },
