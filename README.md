@@ -1,124 +1,215 @@
-# Stream Clip Maker
+<!--
+  Stream Clip Maker README
+  Replace the hero banner with the final app logo / brand artwork when ready.
+-->
 
-**Find the best moments in Twitch and YouTube streams from chat reactions, then turn them into shareable clips.**
+<div align="center">
+  <img src="assets/stream-clip-maker-banner.svg" alt="Stream Clip Maker — turn stream chat reactions into vertical highlights" width="100%" />
 
-Stream Clip Maker analyzes live-chat activity to detect moments when many different viewers react at once. It ranks the strongest highlights and can generate cut commands or run the cutting workflow with FFmpeg, yt-dlp, or TwitchDownloaderCLI.
+  <h1>Stream Clip Maker</h1>
+  <p><strong>Find the moment. Cut the highlight. Share the clip.</strong></p>
+  <p>Turn Twitch and YouTube stream chat reactions into ranked highlights and vertical videos.</p>
 
-- Detect stream highlights from TwitchDownloader chat JSON and YouTube live-chat replay JSONL.
-- Rank reaction spikes using unique chatters, reaction signals, and a rolling baseline.
-- Create clips from Twitch VODs, YouTube URLs, or local recordings.
-- Export vertical 9:16 clips with a blurred background.
-- Includes optional Android/Termux helpers for Spanish subtitles and a title overlay.
+  <p>
+    <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/v/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=npm" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/dm/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=downloads" alt="npm monthly downloads" /></a>
+    <a href="https://github.com/kathennn/stream-clip-maker/stargazers"><img src="https://img.shields.io/github/stars/kathennn/stream-clip-maker?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
+    <a href="https://github.com/kathennn/stream-clip-maker/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kathennn/stream-clip-maker?style=for-the-badge" alt="MIT license" /></a>
+    <img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js 18 or newer" />
+  </p>
 
-**No Node.js runtime dependencies.** External media tools are required for downloading and rendering clips.
+  <p>
+    <a href="#quick-start">Quick start</a> ·
+    <a href="#how-it-works">How it works</a> ·
+    <a href="LEEME.md">Leer en español</a> ·
+    <a href="https://github.com/kathennn/stream-clip-maker/issues">Report a bug</a>
+  </p>
+</div>
 
-Español: [LEEME.md](LEEME.md)
+---
 
-## Install
+## The best moments are already in the chat.
 
-Requires Node.js 18 or newer.
+A sudden flood of emotes. Everyone typing at once. A reaction spike you don't want to miss.
+
+**Stream Clip Maker** analyzes chat activity, finds standout moments, and helps turn them into shareable clips — without manually scrubbing through an entire VOD.
+
+## Why Stream Clip Maker?
+
+| Feature | What it does |
+| --- | --- |
+| **Chat-powered discovery** | Finds reaction spikes using unique chatters and reaction signals. |
+| **Twitch + YouTube chat** | Supports TwitchDownloader chat JSON and YouTube live-chat replay JSONL. |
+| **Highlight ranking** | Scores and merges nearby peaks into reviewable clip candidates. |
+| **Vertical video** | Creates 9:16 clips with a blurred background. |
+| **Local-first workflow** | Runs on your machine; no hosted processing service required. |
+| **Creator review** | Keeps the workflow review-first instead of automatically publishing content. |
+
+## How it works
+
+<div align="center">
+  <img src="assets/stream-clip-maker-banner.svg" alt="Workflow: stream chat, reaction detection, highlight selection, vertical clip" width="100%" />
+</div>
+
+1. **Get the chat replay** from a Twitch VOD or YouTube livestream.
+2. **Analyze reactions** to find windows with unusually high viewer activity.
+3. **Review candidates** and choose the moments worth clipping.
+4. **Render vertical clips** with FFmpeg.
+5. **Review and share** only content you have permission to reuse.
+
+## Quick start
+
+### 1. Install
+
+Requires **Node.js 18+**.
 
 ```bash
 npm install --global stream-clip-maker
 ```
 
-Or run without a global install:
+Or run it without a global install:
 
 ```bash
 npx stream-clip-maker --help
 ```
 
-## Quick start
+### 2. Download a chat replay
 
-First, download a chat replay:
+**Twitch**
 
 ```bash
-# Twitch chat
 TwitchDownloaderCLI chatdownload --id <VOD_ID> -o chat.json
+```
 
-# YouTube live chat replay
+**YouTube live chat replay**
+
+```bash
 yt-dlp --skip-download --write-subs --sub-langs live_chat -o stream "<YOUTUBE_URL>"
 ```
 
-Analyze the chat and print suggested cut commands:
+### 3. Find highlight moments
+
+**Twitch VOD**
 
 ```bash
 stream-clip-maker chat.json --vod <VOD_ID> --vertical
+```
+
+**YouTube replay**
+
+```bash
 stream-clip-maker stream.live_chat.json --url "<YOUTUBE_URL>" --vertical
 ```
 
-Run the commands and create clips:
+### 4. Render your clips
+
+Add `--run` to execute the generated FFmpeg commands:
 
 ```bash
 stream-clip-maker chat.json --vod <VOD_ID> --vertical --run --out clips
-stream-clip-maker stream.live_chat.json --url "<YOUTUBE_URL>" --vertical --run --out clips
+```
+
+You can also render from a local video:
+
+```bash
 stream-clip-maker chat.json --video recording.mp4 --vertical --run --out clips
 ```
 
-See all options:
+See all available options:
 
 ```bash
 stream-clip-maker --help
 ```
 
+## How it works
+
+- Chat is grouped into **10-second windows**.
+- Each window is scored using unique chatters and the share of those chatters posting reaction messages.
+- Windows dominated by repeated, poll-like messages are down-weighted.
+- Candidate moments must exceed a rolling baseline and minimum-reactor thresholds.
+- Nearby peaks are merged into a clip, up to the configured maximum duration.
+- The first three minutes are skipped by default to reduce greeting-related spikes.
+
+The detector is heuristic, not an AI model. Chat reactions may refer to what the streamer says or does, not only the game. Always review the selected moments and rendered clips.
+
+## Vertical video
+
+The `--vertical` option creates a **9:16** version with a blurred background. Automatic face tracking and smart subject reframing are not currently included.
+
 ## Requirements
 
-- Node.js 18+.
-- FFmpeg for video cutting and rendering.
-- Twitch VOD downloads: [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader).
-- YouTube downloads: [yt-dlp](https://github.com/yt-dlp/yt-dlp).
-- Optional Android/Termux workflow: Whisper.cpp and its multilingual base model for speech captions.
+| Tool | Needed for |
+| --- | --- |
+| **Node.js 18+** | Running the CLI |
+| **FFmpeg** | Cutting and rendering video |
+| **TwitchDownloaderCLI** | Downloading Twitch VOD chat / media |
+| **yt-dlp** | Downloading YouTube media and chat replay |
+| **Whisper.cpp** *(optional)* | Speech transcription for the Termux subtitle workflow |
 
-The core chat-analysis command has no third-party Node.js dependencies. Downloading and rendering media requires the corresponding external tools.
+The core chat-analysis command has no third-party Node.js runtime dependencies. Downloading and rendering media requires the relevant external tools.
 
-## How highlight detection works
+## Android / Termux extras
 
-- Chat is divided into 10-second windows.
-- Each window is scored using the number of unique chatters and the share of those chatters who post reaction messages.
-- Poll-like windows dominated by one repeated non-reaction message are down-weighted.
-- A window is considered a candidate when it exceeds the rolling baseline and minimum-reactor thresholds.
-- Nearby peaks are merged into a clip, up to the configured maximum duration.
-- By default, the first three minutes are skipped to avoid greeting spikes.
+The repository also includes optional scripts for the project's Android workflow:
 
-The scoring is heuristic, not an AI model. Chat reactions can refer to what the streamer says or does, not only to the game. Always review the detected moments and finished videos.
+| Script | Purpose |
+| --- | --- |
+| `discover-twitch.sh` | Search live Twitch channels and archived VODs by category using Twitch Helix. |
+| `make-clips.sh` | Download Twitch chat, detect moments, render vertical clips, add Spanish captions/title, and copy outputs to Downloads. |
+| `enhance-clip.sh` | Transcribe Spanish speech with Whisper.cpp and burn in title/subtitles. |
+| `youtube-auth.mjs` | Configure local YouTube OAuth. |
+| `youtube-upload.mjs` | Validate and upload a final Short as private. |
+| `publish-short.sh` | Wrapper for the review-first YouTube upload flow. |
 
-## Vertical clips
-
-The `--vertical` option creates a 9:16 version with a blurred background. It does not currently perform automatic face tracking or smart subject reframing.
-
-## Android / Termux helpers
-
-The repository also includes optional scripts for an Android workflow:
-
-- `make-clips.sh`: Twitch VOD chat download, highlight detection, vertical clip creation, Spanish captions, title overlay, and copy to Android Downloads.
-- `enhance-clip.sh`: Spanish speech transcription with Whisper.cpp and title/subtitle burn-in.
-- `discover-twitch.sh`: search live Twitch channels by category using Twitch Helix.
-- `youtube-auth.mjs` and `youtube-upload.mjs`: local YouTube OAuth and private upload workflow.
-- `publish-short.sh`: validates a final 1080×1920 MP4 of up to 180 seconds before upload.
-
-These helpers are designed for the project's Termux setup and require additional local tools and configuration. They are not a hosted service and do not publish automatically.
+These helpers require additional local tools and configuration. They are not a hosted service and do not publish automatically.
 
 ### Twitch discovery setup
 
 1. Create an application in the [Twitch Developer Console](https://dev.twitch.tv/console/apps).
-2. Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`.
-3. Add creator logins you have permission to edit to `allowedCreators` in `rules.json`.
-4. Run `./discover-twitch.sh "GTA 6"` from the repository checkout.
+2. Copy `.env.example` to `.env`.
+3. Set `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET` in `.env`.
+4. Add creator logins you have permission to edit to `allowedCreators` in `rules.json`.
+5. Run the discovery script from your repository checkout:
 
-Discovered channels are **not automatically authorized**. Only creators explicitly listed in `allowedCreators` are marked as authorized in the discovery output. Twitch API discovery does not grant permission to reuse a creator's content.
+```bash
+./discover-twitch.sh "GTA 6"
+```
+
+**Discovery is not permission.** Finding a channel through Twitch's API does not grant rights to reuse its content. Only creators explicitly listed in `allowedCreators` should be treated as authorized by your local workflow.
 
 ### YouTube upload safety
 
-The upload helper requires an explicit `--confirm-rights` flag, accepts only files ending in `_final.mp4`, validates 1080×1920 dimensions and a duration up to 180 seconds, and uploads as private. Review the clip, creator permissions, title, and description before publishing.
+The upload helper:
+- Requires the explicit `--confirm-rights` flag.
+- Accepts only files ending in `_final.mp4`.
+- Checks for **1080×1920** resolution and a duration of up to **180 seconds**.
+- Uploads as **private** for manual review.
+
+Review the clip, creator permissions, title, and description before publishing.
 
 ## Development
 
+Clone the repository:
+
 ```bash
-npm run check
+git clone https://github.com/kathennn/stream-clip-maker.git
+cd stream-clip-maker
 npm test
 npm pack --dry-run
 ```
 
+## Contributing
+
+Bug reports, feature requests, and pull requests are welcome. Please include reproduction steps and relevant environment details, but never attach API keys, OAuth credentials, private chat logs, or copyrighted media you do not have permission to share.
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+Released under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+  <strong>Made for creators who don't want to miss the moment.</strong>
+  <br />
+  <sub>If Stream Clip Maker helps your workflow, consider giving the project a star.</sub>
+</div>
