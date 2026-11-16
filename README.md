@@ -23,6 +23,8 @@
     <a href="#quick-start">Quick start</a> ·
     <a href="#how-it-works">How it works</a> ·
     <a href="LEEME.md">Leer en español</a> ·
+    <a href="https://kathennn.github.io/stream-clip-maker/">Website & downloads</a> ·
+    <a href="https://github.com/kathennn/stream-clip-maker/releases/tag/v0.1.0">Release v0.1.0</a> ·
     <a href="https://github.com/kathennn/stream-clip-maker/issues">Report a bug</a>
   </p>
 </div>
@@ -57,6 +59,31 @@ A sudden flood of emotes. Everyone typing at once. A reaction spike you don't wa
 3. **Review candidates** and choose the moments worth clipping.
 4. **Render vertical clips** with FFmpeg.
 5. **Review and share** only content you have permission to reuse.
+
+## Desktop downloads — v0.1.0
+
+Official desktop installers for Linux x64 and Windows x64. Each link downloads directly from the public GitHub release.
+
+| Platform | Package | Direct download |
+| --- | --- | --- |
+| Linux Debian / Ubuntu | DEB | [Download DEB](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.deb) |
+| Linux Fedora | RPM | [Download RPM](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker-0.1.0-1.x86_64.rpm) |
+| Linux portable | AppImage | [Download AppImage](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.AppImage) |
+| Windows | MSI | [Download MSI](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64_en-US.msi) |
+| Windows | EXE | [Download EXE](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64-setup.exe) |
+
+Linux: install DEB/RPM with your package manager. For AppImage, run chmod +x on the downloaded file and launch it. Windows: run the MSI or EXE installer.
+
+**macOS:** this release has no supported native desktop installer. Use the guided TUI from a source checkout:
+
+    git clone https://github.com/kathennn/stream-clip-maker.git
+    cd stream-clip-maker
+    npm install
+    node cli.mjs
+
+Install Node.js 18+, FFmpeg and the download tools needed by your workflow. The menu includes Search, Create, Enhance, Share, Setup & Help and Check. Rendering and publishing require confirmation; nothing is auto-published.
+
+The desktop app processes files locally. Install FFmpeg and whichever of yt-dlp / TwitchDownloaderCLI your workflow needs. See the [official download website](https://kathennn.github.io/stream-clip-maker/).
 
 ## Interactive terminal interface
 

@@ -17,7 +17,32 @@ Stream Clip Maker analiza la actividad del chat para detectar momentos en los qu
 
 **No necesita dependencias Node.js de terceros.** Para descargar y renderizar vídeo hacen falta herramientas externas.
 
-English: [README.md](README.md)
+English: [README.md](README.md) · [Web oficial y descargas](https://kathennn.github.io/stream-clip-maker/)
+
+## Descargas de escritorio — v0.1.0
+
+Instaladores oficiales para Linux x64 y Windows x64. Cada enlace descarga directamente desde la release pública de GitHub.
+
+| Plataforma | Paquete | Descarga directa |
+| --- | --- | --- |
+| Linux Debian / Ubuntu | DEB | [Descargar DEB](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.deb) |
+| Linux Fedora | RPM | [Descargar RPM](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker-0.1.0-1.x86_64.rpm) |
+| Linux portable | AppImage | [Descargar AppImage](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.AppImage) |
+| Windows | MSI | [Descargar MSI](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64_en-US.msi) |
+| Windows | EXE | [Descargar EXE](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64-setup.exe) |
+
+Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x al archivo descargado y ejecútalo. Windows: ejecuta el instalador MSI o EXE.
+
+**macOS:** esta versión no tiene instalador nativo compatible. Utiliza la TUI guiada desde una copia del repositorio:
+
+    git clone https://github.com/kathennn/stream-clip-maker.git
+    cd stream-clip-maker
+    npm install
+    node cli.mjs
+
+Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
+
+La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://kathennn.github.io/stream-clip-maker/).
 
 ## Interfaz interactiva (TUI)
 
