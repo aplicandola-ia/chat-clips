@@ -79,11 +79,11 @@ jobs:
         if: matrix.os == 'macos' && matrix.node_arch == 'arm64'
         shell: bash
         run: |
-          NODE_VERSION=\"$(node -p \"process.versions.node\")\"
-          curl -fsSL \"https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-darwin-arm64.tar.gz\" -o /tmp/node-arm64.tar.gz
+          NODE_VERSION="$(node -p "process.versions.node")"
+          curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-darwin-arm64.tar.gz" -o /tmp/node-arm64.tar.gz
           tar -xzf /tmp/node-arm64.tar.gz -C /tmp
           mkdir -p src-tauri/resources/runtime
-          cp \"/tmp/node-v${NODE_VERSION}-darwin-arm64/bin/node\" src-tauri/resources/runtime/node
+          cp "/tmp/node-v${NODE_VERSION}-darwin-arm64/bin/node" src-tauri/resources/runtime/node
           chmod 755 src-tauri/resources/runtime/node
 
       - name: Bundle Node.js runtime (Unix)
