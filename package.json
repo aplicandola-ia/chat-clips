@@ -58,7 +58,7 @@
   "bugs": {
     "url": "https://github.com/kathennn/stream-clip-maker/issues"
   },
-  "homepage": "https://github.com/kathennn/stream-clip-maker#readme",
+  "homepage": "https://kathennn.github.io/stream-clip-maker/",
   "publishConfig": {
     "access": "public"
   },
