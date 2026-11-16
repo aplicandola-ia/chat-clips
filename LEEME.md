@@ -17,11 +17,11 @@ Stream Clip Maker analiza la actividad del chat para detectar momentos en los qu
 
 **No necesita dependencias Node.js de terceros.** Para descargar y renderizar vídeo hacen falta herramientas externas.
 
-English: [README.md](README.md) · [Web oficial y descargas](https://kathennn.github.io/stream-clip-maker/)
+English: [README.md](README.md) · [Web oficial y descargas](https://aplicandola-ia.github.io/chat-clips/)
 
 ## Descargas de escritorio — v0.1.0
 
-Instaladores oficiales para Linux x64 y Windows x64. Cada enlace descarga directamente desde la release pública de GitHub.
+Instaladores para Linux x64 y Windows x64. Los de la v0.1.0 los publicó kathennn en el [repositorio original](https://github.com/kathennn/stream-clip-maker); las próximas versiones saldrán de este.
 
 | Plataforma | Paquete | Descarga directa |
 | --- | --- | --- |
@@ -35,14 +35,14 @@ Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x
 
 **macOS:** esta versión no tiene instalador nativo compatible. Utiliza la TUI guiada desde una copia del repositorio:
 
-    git clone https://github.com/kathennn/stream-clip-maker.git
-    cd stream-clip-maker
-    npm install
+    git clone https://github.com/aplicandola-ia/chat-clips.git
+    cd chat-clips
+    pnpm install --frozen-lockfile
     node cli.mjs
 
 Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
 
-La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://kathennn.github.io/stream-clip-maker/).
+La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://aplicandola-ia.github.io/chat-clips/).
 
 ## Interfaz interactiva (TUI)
 
@@ -58,17 +58,22 @@ También se mantienen los comandos y opciones tradicionales para usuarios avanza
 
 ## Instalación
 
-Necesitas Node.js 18 o superior.
+Necesitas Node.js 18 o superior y pnpm.
 
 ```bash
-npm install --global stream-clip-maker
+git clone https://github.com/aplicandola-ia/chat-clips.git
+cd chat-clips
+pnpm install --frozen-lockfile
+node cli.mjs        # menú guiado
 ```
 
-O ejecútalo sin instalación global:
+Si solo quieres el detector de momentos, `chat-clips.mjs` funciona solo, sin dependencias:
 
 ```bash
-npx stream-clip-maker --help
+node chat-clips.mjs chat.json --vertical
 ```
+
+Donde esta guía dice `stream-clip-maker`, desde una copia del repositorio usa `node cli.mjs` (menú guiado) o `node chat-clips.mjs` (detector). El paquete `stream-clip-maker` de npm lo publica kathennn desde su repositorio.
 
 ## Inicio rápido
 
@@ -166,9 +171,9 @@ Para usarlo con ChatGPT, descarga el ZIP e impórtalo mediante Plugin Creator o 
 ## Desarrollo
 
 ```bash
-npm run check
-npm test
-npm pack --dry-run
+pnpm run check
+pnpm test
+pnpm pack --dry-run
 ```
 
 ## Licencia

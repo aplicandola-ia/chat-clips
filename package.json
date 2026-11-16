@@ -53,12 +53,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kathennn/stream-clip-maker.git"
+    "url": "git+https://github.com/aplicandola-ia/chat-clips.git"
   },
   "bugs": {
-    "url": "https://github.com/kathennn/stream-clip-maker/issues"
+    "url": "https://github.com/aplicandola-ia/chat-clips/issues"
   },
-  "homepage": "https://kathennn.github.io/stream-clip-maker/",
+  "homepage": "https://aplicandola-ia.github.io/chat-clips/",
   "publishConfig": {
     "access": "public"
   },
