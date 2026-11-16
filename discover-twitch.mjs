@@ -119,7 +119,8 @@ async function main() {
     authorizationMode: "editor_permission_confirmed_by_user",
     note: "Los permisos de edición/publicación han sido confirmados por el usuario. La búsqueda incluye directos y VODs archivados; el descubrimiento de Twitch no determina por sí solo el estado de cada permiso.",
   };
-  writeFileSync(new URL("./discovery.json", import.meta.url), JSON.stringify(result, null, 2));
+  const outputPath = process.env.STREAM_CLIP_DISCOVERY_OUT || new URL("./discovery.json", import.meta.url);
+  writeFileSync(outputPath, JSON.stringify(result, null, 2));
   console.log(JSON.stringify({
     topic, categories: result.categories.map(c => c.name),
     foundLive: streams.length, foundVods: vods.length, authorized: result.authorizedMatches,
