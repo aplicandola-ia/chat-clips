@@ -1,53 +1,177 @@
-# chat-clips
+<div align="center">
+  <img src="assets/stream-clip-maker-icon.png" alt="Stream Clip Maker app icon" width="144" />
+  <img src="assets/stream-clip-maker-wordmark.png" alt="Stream Clip Maker" width="92%" />
+</div>
 
-Encuentra los momentos buenos de un directo leyendo su chat: cuando mucha gente distinta reacciona a la vez, algo ha pasado en pantalla. Es un solo archivo y no tiene dependencias (Node.js 18 o superior). Para cortar los clips necesitas además `ffmpeg` y, según la plataforma, `yt-dlp` (YouTube) o `TwitchDownloaderCLI` (Twitch).
+# Stream Clip Maker
 
-De [Aplicando La IA](https://aplicandolaia.com) · guía paso a paso: [aplicandolaia.com/recursos/clips-gta6](https://aplicandolaia.com/recursos/clips-gta6#chat-clips) · English: [README.md](README.md)
+**Encuentra los mejores momentos de directos de Twitch y YouTube a partir de las reacciones del chat y conviértelos en clips.**
 
-## Uso
+Stream Clip Maker analiza la actividad del chat para detectar momentos en los que reaccionan muchas personas distintas a la vez. Ordena los momentos destacados y puede generar los comandos de corte o ejecutar el flujo con FFmpeg, yt-dlp o TwitchDownloaderCLI.
+
+- Detecta momentos destacados en chats JSON de TwitchDownloader y replay JSONL de YouTube.
+- Puntúa picos de reacción según usuarios únicos, mensajes de reacción y una línea base móvil.
+- Crea clips desde VODs de Twitch, URLs de YouTube o grabaciones locales.
+- Exporta versiones verticales 9:16 con fondo desenfocado.
+- Incluye herramientas opcionales para Android/Termux con subtítulos en español y título incrustado.
+
+**No necesita dependencias Node.js de terceros.** Para descargar y renderizar vídeo hacen falta herramientas externas.
+
+English: [README.md](README.md) · [Web oficial y descargas](https://kathennn.github.io/stream-clip-maker/)
+
+## Descargas de escritorio — v0.1.0
+
+Instaladores oficiales para Linux x64 y Windows x64. Cada enlace descarga directamente desde la release pública de GitHub.
+
+| Plataforma | Paquete | Descarga directa |
+| --- | --- | --- |
+| Linux Debian / Ubuntu | DEB | [Descargar DEB](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.deb) |
+| Linux Fedora | RPM | [Descargar RPM](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker-0.1.0-1.x86_64.rpm) |
+| Linux portable | AppImage | [Descargar AppImage](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_amd64.AppImage) |
+| Windows | MSI | [Descargar MSI](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64_en-US.msi) |
+| Windows | EXE | [Descargar EXE](https://github.com/kathennn/stream-clip-maker/releases/download/v0.1.0/Stream.Clip.Maker_0.1.0_x64-setup.exe) |
+
+Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x al archivo descargado y ejecútalo. Windows: ejecuta el instalador MSI o EXE.
+
+**macOS:** esta versión no tiene instalador nativo compatible. Utiliza la TUI guiada desde una copia del repositorio:
+
+    git clone https://github.com/kathennn/stream-clip-maker.git
+    cd stream-clip-maker
+    npm install
+    node cli.mjs
+
+Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
+
+La aplicación procesa archivos localmente. Instala FFmpeg y yt-dlp o TwitchDownloaderCLI según tu flujo. Consulta la [web oficial de descargas](https://kathennn.github.io/stream-clip-maker/).
+
+## Interfaz interactiva (TUI)
+
+Ejecuta el programa sin argumentos para abrir el menú guiado:
 
 ```bash
-# 1. Descarga el chat
-yt-dlp --skip-download --write-subs --sub-langs live_chat -o directo "<enlace-de-youtube>"   # -> directo.live_chat.json
-TwitchDownloaderCLI chatdownload --id <id-del-vod> -o chat.json                               # Twitch
-
-# 2. Busca los momentos y enseña los comandos para cortarlos
-node chat-clips.mjs directo.live_chat.json --url "<enlace-de-youtube>" --vertical
-
-# 3. Lo mismo, pero descargando y cortando todo (un comando)
-node chat-clips.mjs directo.live_chat.json --url "<enlace-de-youtube>" --vertical --run --out clips
-node chat-clips.mjs chat.json --vod <id-del-vod> --vertical --run --out clips
-node chat-clips.mjs chat.json --video mi-grabacion.mp4 --vertical --run   # tu propia grabación
+stream-clip-maker
 ```
 
-`node chat-clips.mjs --help` enseña todas las opciones.
+Desde el menú puedes analizar chats, crear clips desde VODs de Twitch / URLs compatibles / vídeos locales, descubrir directos y añadir subtítulos y títulos. Antes de renderizar vídeos pide confirmación. Nunca publica vídeos automáticamente.
 
-## Cómo puntúa
+También se mantienen los comandos y opciones tradicionales para usuarios avanzados.
 
-- Ventanas de 10 segundos. Puntuación = personas distintas escribiendo × (1 + 2 × la parte de ellas que reacciona).
-- Cuentan como reacción `jaja`, `xd`, `kekw`, `lmao`, `nooo`, `wtf`, `qué pasó`, `clip`, `pog`, `F` y emojis como 😂 🤣 💀 😱 (lista `REACTION` en el código).
-- Si en una ventana domina un mensaje que no es reacción (encuestas tipo «100» o «sí»), su puntuación se multiplica por 0,4.
-- Cada ventana se compara con la mediana de los 5 minutos anteriores (nunca por debajo de la mediana del directo). Es un pico si llega a 2,5 veces esa cifra y reaccionan al menos 5 personas.
-- Se saltan los 3 primeros minutos del chat (saludos). Los picos cercanos se juntan en un clip de hasta 90 s.
-- Clip = 20 s antes del pico (el chat reacciona tarde) hasta 15 s después.
-- `--simple` cuenta solo mensajes, sin ponderar por personas ni reacciones.
+## Instalación
 
-## Directos largos de Twitch
+Necesitas Node.js 18 o superior.
 
-No hace falta descargar todo el chat: `TwitchDownloaderCLI chatdownload --id <id-del-vod> -b 2:00:00 -e 3:30:00 -o chat.json` baja solo ese tramo, y chat-clips lo analiza desde su primer mensaje.
+```bash
+npm install --global stream-clip-maker
+```
 
-## Ajustes útiles
+O ejecútalo sin instalación global:
 
-- Salen demasiados momentos: sube `--ratio` (por ejemplo 3,5) o `--min`.
-- Salen muy pocos: baja `--ratio` (por ejemplo 2) o `--min`.
-- El clip empieza tarde o pronto: cambia `--lead` (segundos antes del pico).
+```bash
+npx stream-clip-maker --help
+```
 
-## Antes de subir un clip
+## Inicio rápido
 
-Solo clipea a creadores que lo permiten y respeta sus reglas y las de cada plataforma.
+Descarga primero el chat del directo:
 
-Ojo: el chat también reacciona a lo que dice el streamer, no solo al juego. Revisa cada clip antes de subirlo.
+```bash
+# Chat de Twitch
+TwitchDownloaderCLI chatdownload --id <ID_DEL_VOD> -o chat.json
+
+# Replay del chat de YouTube
+yt-dlp --skip-download --write-subs --sub-langs live_chat -o directo "<URL_YOUTUBE>"
+```
+
+Analiza el chat y muestra los comandos sugeridos:
+
+```bash
+stream-clip-maker chat.json --vod <ID_DEL_VOD> --vertical
+stream-clip-maker directo.live_chat.json --url "<URL_YOUTUBE>" --vertical
+```
+
+Ejecuta los comandos y crea los clips:
+
+```bash
+stream-clip-maker chat.json --vod <ID_DEL_VOD> --vertical --run --out clips
+stream-clip-maker directo.live_chat.json --url "<URL_YOUTUBE>" --vertical --run --out clips
+stream-clip-maker chat.json --video grabacion.mp4 --vertical --run --out clips
+```
+
+Todas las opciones:
+
+```bash
+stream-clip-maker --help
+```
+
+## Requisitos
+
+- Node.js 18 o superior.
+- FFmpeg para cortar y renderizar vídeo.
+- Descargas de VODs de Twitch: [TwitchDownloaderCLI](https://github.com/lay295/TwitchDownloader).
+- Descargas de YouTube: [yt-dlp](https://github.com/yt-dlp/yt-dlp).
+- Flujo opcional en Android/Termux: Whisper.cpp y su modelo multilingüe base para generar subtítulos.
+
+El análisis del chat no tiene dependencias Node.js de terceros. Para descargar y renderizar medios hacen falta las herramientas externas correspondientes.
+
+## Cómo detecta los momentos destacados
+
+- Divide el chat en ventanas de 10 segundos.
+- Puntúa cada ventana según el número de usuarios únicos y la proporción de ellos que envían reacciones.
+- Reduce el peso de ventanas dominadas por mensajes repetidos que parecen encuestas.
+- Detecta candidatos cuando superan la línea base y el mínimo de personas que reaccionan.
+- Une picos cercanos en un clip, hasta la duración máxima configurada.
+- Por defecto ignora los tres primeros minutos para evitar picos de saludos.
+
+La puntuación es heurística, no un modelo de inteligencia artificial. El chat puede reaccionar a lo que dice o hace el streamer, no solo al juego. Revisa siempre los momentos y los vídeos finales.
+
+## Clips verticales
+
+La opción `--vertical` crea una versión 9:16 con fondo desenfocado. Actualmente no incluye seguimiento automático de caras ni reencuadre inteligente del sujeto.
+
+## Herramientas Android / Termux
+
+El repositorio también incluye scripts opcionales para Android:
+
+- `make-clips.sh`: descarga el chat de un VOD de Twitch, detecta momentos, crea clips verticales, añade subtítulos en español y título, y copia los resultados a Descargas.
+- `enhance-clip.sh`: transcribe voz en español con Whisper.cpp e incrusta título y subtítulos.
+- `discover-twitch.sh`: busca directos por categoría usando Twitch Helix.
+- `youtube-auth.mjs` y `youtube-upload.mjs`: autorización local OAuth y subida privada a YouTube.
+- `publish-short.sh`: valida un MP4 final 1080×1920 de hasta 180 segundos antes de subirlo.
+
+Estos scripts están diseñados para el entorno Termux del proyecto y requieren herramientas y configuración locales adicionales. No es un servicio alojado y no publica automáticamente.
+
+### Configurar la búsqueda de Twitch
+
+1. Crea una aplicación en [Twitch Developer Console](https://dev.twitch.tv/console/apps).
+2. Copia `.env.example` a `.env` y completa `TWITCH_CLIENT_ID` y `TWITCH_CLIENT_SECRET`.
+3. Añade en `allowedCreators` de `rules.json` los nombres de creadores cuyo contenido tienes permiso para editar.
+4. Ejecuta `./discover-twitch.sh "GTA 6"` desde una copia del repositorio.
+
+Los canales encontrados **no quedan autorizados automáticamente**. Solo los creadores incluidos expresamente en `allowedCreators` aparecen como autorizados. Encontrar un directo mediante la API de Twitch no concede permiso para reutilizar su contenido.
+
+### Seguridad al subir a YouTube
+
+El uploader exige la opción explícita `--confirm-rights`, solo acepta archivos terminados en `_final.mp4`, comprueba la resolución 1080×1920 y la duración máxima de 180 segundos, y sube los vídeos como privados. Revisa el clip, los permisos del creador, el título y la descripción antes de publicar.
+
+## Plugins para ChatGPT
+
+El repositorio incluye dos paquetes de plugins de instrucciones listos para importar:
+
+- [Asistente Stream Clip Maker — ZIP](plugins/stream-clip-maker-assistant.zip): guía a ChatGPT en la instalación, análisis de chats de Twitch/YouTube, uso de la app de escritorio y TUI, renderizado y solución de problemas.
+- [Guía Remote Desktop Commander — ZIP](plugins/remote-desktop-commander-guide.zip): explica conexión de dispositivos, terminal, archivos, Git/despliegues y seguridad.
+
+Para usarlos con ChatGPT, descarga el ZIP e impórtalo mediante Plugin Creator o el flujo de importación de plugins disponible en tu cuenta. Cuando esté guardado, selecciona el plugin en una conversación y describe la tarea.
+
+**Importante:** son plugins de instrucciones/skills, no servidores de ejecución remota. La guía de Remote Desktop Commander no concede acceso al ordenador. Conecta por separado la integración oficial de Remote Desktop Commander y autoriza tu dispositivo; después utiliza la guía junto a esa integración. Consulta las carpetas de cada plugin para ver todos los detalles.
+
+## Desarrollo
+
+```bash
+npm run check
+npm test
+npm pack --dry-run
+```
 
 ## Licencia
 
-MIT (ver LICENSE): puedes usarla, cambiarla y compartirla, también en proyectos comerciales, manteniendo el aviso de copyright.
+MIT. Consulta [LICENSE](LICENSE).
