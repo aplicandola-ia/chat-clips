@@ -20,6 +20,8 @@
     "publish-short.sh",
     "youtube-auth.mjs",
     "youtube-upload.mjs",
+    "assets/stream-clip-maker-wordmark.png",
+    "assets/stream-clip-maker-icon.png",
     "assets/stream-clip-maker-banner.svg",
     "rules.json",
     ".env.example",

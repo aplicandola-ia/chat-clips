@@ -1,10 +1,10 @@
 <!--
   Stream Clip Maker README
-  Replace the hero banner with the final app logo / brand artwork when ready.
+  Official Stream Clip Maker brand assets.
 -->
 
 <div align="center">
-  <img src="assets/stream-clip-maker-banner.svg" alt="Stream Clip Maker — turn stream chat reactions into vertical highlights" width="100%" />
+  <img src="assets/stream-clip-maker-wordmark.png" alt="Stream Clip Maker" width="92%" />
 
   <h1>Stream Clip Maker</h1>
   <p><strong>Find the moment. Cut the highlight. Share the clip.</strong></p>

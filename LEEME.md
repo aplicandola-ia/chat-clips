@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/stream-clip-maker-wordmark.png" alt="Stream Clip Maker" width="92%" />
+</div>
+
 # Stream Clip Maker
 
 **Encuentra los mejores momentos de directos de Twitch y YouTube a partir de las reacciones del chat y conviértelos en clips.**
