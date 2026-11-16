@@ -9,7 +9,7 @@
 <section id="how"><div class="wrap"><div class="eyebrow">Simple workflow</div><h2>From chat replay to highlight</h2><div class="steps"><div class="step"><b>01 / IMPORT</b><h3>Get the chat</h3><p class="muted">Load TwitchDownloader JSON or YouTube live-chat replay.</p></div><div class="step"><b>02 / ANALYZE</b><h3>Find reaction spikes</h3><p class="muted">Score unique chatters and reactions to rank candidate moments.</p></div><div class="step"><b>03 / REVIEW</b><h3>Choose highlights</h3><p class="muted">Inspect suggestions and select the moments worth clipping.</p></div><div class="step"><b>04 / EXPORT</b><h3>Render vertical clips</h3><p class="muted">Use FFmpeg locally to create 9:16 videos. Nothing is auto-published.</p></div></div></div></section>
 <section id="macos"><div class="wrap mac"><div><div class="eyebrow">For Apple users</div><h2>Use the guided TUI on macOS</h2><p class="muted">The native macOS desktop installer is not part of this release. The Node.js TUI provides the guided workflow on macOS, Linux and Termux.</p><div class="notice">Install Node.js 18+ and FFmpeg first. Add yt-dlp and/or TwitchDownloaderCLI for your source. Confirm creator permissions before reusing content.</div><p><a href="https://github.com/aplicandola-ia/chat-clips/blob/main/README.md#macos-use-the-guided-tui">Read the full macOS guide →</a></p></div><pre class="code">git clone https://github.com/aplicandola-ia/chat-clips.git
 cd chat-clips
-pnpm install --frozen-lockfile
+npm install
 node cli.mjs
 
 # Advanced options

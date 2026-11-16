@@ -15,7 +15,7 @@ Release: https://github.com/kathennn/stream-clip-maker/releases/tag/v0.1.0
 - macOS: no native desktop installer is supported in v0.1.0. Guide users through the Node.js TUI:
   git clone https://github.com/aplicandola-ia/chat-clips.git
   cd chat-clips
-  pnpm install --frozen-lockfile
+  npm install
   node cli.mjs
 - Android: Termux is a separate CLI workflow, not a Tauri desktop app.
 

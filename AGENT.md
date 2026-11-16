@@ -15,10 +15,10 @@ Stream Clip Maker turns Twitch and YouTube chat activity into candidate highligh
 
 ## Development and verification
 
-- Requires Node.js 18 or newer and pnpm. Never use npx or npm install: pnpm keeps exact versions and skips install scripts.
-- Install dependencies with pnpm install --frozen-lockfile.
-- Run pnpm test for syntax checks and CLI smoke tests.
-- Run pnpm build for the desktop frontend when changing UI/build code.
+- Requires Node.js 18 or newer and npm.
+- Install dependencies with npm ci when a lockfile is present.
+- Run npm test for syntax checks and CLI smoke tests.
+- Run npm run build for the desktop frontend when changing UI/build code.
 - Validate changed shell scripts with bash -n.
 - Add deterministic Node.js tests for behavior changes. CI discovers project-owned test and spec files and runs them with node --test.
 - Keep tests offline and independent of personal accounts, real streams, OAuth, and external publishing services.

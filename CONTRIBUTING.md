@@ -14,7 +14,7 @@ Thanks for your interest in contributing! Bug reports, documentation improvement
 Requirements:
 
 - Node.js 18 or newer
-- pnpm (the repo pins its version in `packageManager`)
+- npm
 - Git
 - FFmpeg for features or tests that inspect, cut, or render video
 
@@ -23,13 +23,13 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/aplicandola-ia/chat-clips.git
 cd chat-clips
-pnpm install --frozen-lockfile
+npm install
 ```
 
 Run the project's safe checks:
 
 ```bash
-pnpm test
+npm test
 ```
 
 You can also inspect the command-line help:
@@ -47,7 +47,7 @@ The core chat-analysis workflow can be developed and tested without Twitch or Yo
 2. Keep the change scoped to one bug, feature, or documentation improvement.
 3. Add or update tests when behavior changes.
 4. Update the README or command help if users will notice a new option or behavior.
-5. Run `pnpm test` before opening a pull request.
+5. Run `npm test` before opening a pull request.
 6. Review your diff to make sure it contains only the intended files.
 
 Prefer small, readable changes. Avoid introducing new dependencies unless they provide clear value and are justified in the pull request.

@@ -1,3 +1,0 @@
-# pnpm settings (pnpm v11+ reads them from here, not from .npmrc)
-saveExact: true
-minimumReleaseAge: 4320 # minutes = 3 days: skip versions published in the last 3 days

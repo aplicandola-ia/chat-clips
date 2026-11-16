@@ -39,7 +39,7 @@ Linux: instala DEB/RPM con tu gestor de paquetes. Para AppImage, aplica chmod +x
 
     git clone https://github.com/aplicandola-ia/chat-clips.git
     cd chat-clips
-    pnpm install --frozen-lockfile
+    npm install
     node cli.mjs
 
 Instala Node.js 18+, FFmpeg y las herramientas necesarias. El menú incluye Search, Create, Enhance, Share, Setup & Help y Check. Renderizar o publicar requiere confirmación; no se publica nada automáticamente.
@@ -60,22 +60,17 @@ También se mantienen los comandos y opciones tradicionales para usuarios avanza
 
 ## Instalación
 
-Necesitas Node.js 18 o superior y pnpm.
+Necesitas Node.js 18 o superior.
 
 ```bash
-git clone https://github.com/aplicandola-ia/chat-clips.git
-cd chat-clips
-pnpm install --frozen-lockfile
-node cli.mjs        # menú guiado
+npm install --global stream-clip-maker
 ```
 
-Si solo quieres el detector de momentos, `chat-clips.mjs` funciona solo, sin dependencias:
+O ejecútalo sin instalación global:
 
 ```bash
-node chat-clips.mjs chat.json --vertical
+npx stream-clip-maker --help
 ```
-
-Donde esta guía dice `stream-clip-maker`, desde una copia del repositorio usa `node cli.mjs` (menú guiado) o `node chat-clips.mjs` (detector). El paquete `stream-clip-maker` de npm lo publica kathennn desde su repositorio.
 
 ## Inicio rápido
 
@@ -173,9 +168,9 @@ Para usarlo con ChatGPT, descarga el ZIP e impórtalo mediante Plugin Creator o 
 ## Desarrollo
 
 ```bash
-pnpm run check
-pnpm test
-pnpm pack --dry-run
+npm run check
+npm test
+npm pack --dry-run
 ```
 
 ## Autores

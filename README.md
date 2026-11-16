@@ -12,6 +12,8 @@
   <p>Turn Twitch and YouTube stream chat reactions into ranked highlights and vertical videos.</p>
 
   <p>
+    <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/v/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=npm" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/stream-clip-maker"><img src="https://img.shields.io/npm/dm/stream-clip-maker?style=for-the-badge&logo=npm&logoColor=white&label=downloads" alt="npm monthly downloads" /></a>
     <a href="https://github.com/aplicandola-ia/chat-clips/stargazers"><img src="https://img.shields.io/github/stars/aplicandola-ia/chat-clips?style=for-the-badge&logo=github&label=stars" alt="GitHub stars" /></a>
     <a href="https://github.com/aplicandola-ia/chat-clips/blob/main/LICENSE"><img src="https://img.shields.io/github/license/aplicandola-ia/chat-clips?style=for-the-badge" alt="MIT license" /></a>
     <img src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js 18 or newer" />
@@ -80,7 +82,7 @@ Linux: install DEB/RPM with your package manager. For AppImage, run chmod +x on 
 
     git clone https://github.com/aplicandola-ia/chat-clips.git
     cd chat-clips
-    pnpm install --frozen-lockfile
+    npm install
     node cli.mjs
 
 Install Node.js 18+, FFmpeg and the download tools needed by your workflow. The menu includes Search, Create, Enhance, Share, Setup & Help and Check. Rendering and publishing require confirmation; nothing is auto-published.
@@ -103,22 +105,17 @@ Advanced users can keep using the original flags and scripts; for example, `stre
 
 ### 1. Install
 
-Requires **Node.js 18+** and pnpm.
+Requires **Node.js 18+**.
 
 ```bash
-git clone https://github.com/aplicandola-ia/chat-clips.git
-cd chat-clips
-pnpm install --frozen-lockfile
-node cli.mjs        # guided menu
+npm install --global stream-clip-maker
 ```
 
-If you only need the moment detector, `chat-clips.mjs` runs on its own with no dependencies:
+Or run it without a global install:
 
 ```bash
-node chat-clips.mjs chat.json --vertical
+npx stream-clip-maker
 ```
-
-Wherever this guide says `stream-clip-maker`, a checkout can use `node cli.mjs` (guided menu) or `node chat-clips.mjs` (detector). The `stream-clip-maker` npm package is published by kathennn from the original repository.
 
 ### 2. Download a chat replay
 
@@ -251,8 +248,8 @@ Clone the repository:
 ```bash
 git clone https://github.com/aplicandola-ia/chat-clips.git
 cd chat-clips
-pnpm test
-pnpm pack --dry-run
+npm test
+npm pack --dry-run
 ```
 
 ## Contributing
