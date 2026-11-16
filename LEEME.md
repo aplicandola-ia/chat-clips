@@ -23,7 +23,7 @@ English: [README.md](README.md) · [Web oficial y descargas](https://aplicandola
 
 ## Descargas de escritorio — v0.1.0
 
-Instaladores para Linux x64 y Windows x64. Los de la v0.1.0 los publicó kathennn en el [repositorio original](https://github.com/kathennn/stream-clip-maker); las próximas versiones saldrán de este.
+Instaladores para Linux x64 y Windows x64. Los de la v0.1.0 los publicó Manuel en el [repositorio original](https://github.com/kathennn/stream-clip-maker); las próximas versiones saldrán de este.
 
 | Plataforma | Paquete | Descarga directa |
 | --- | --- | --- |
@@ -175,8 +175,7 @@ npm pack --dry-run
 
 ## Autores
 
-- **[kathennn](https://github.com/kathennn)** creó Stream Clip Maker: el menú guiado de terminal, la app de escritorio, la búsqueda en Twitch, los subtítulos y el título, la subida privada a YouTube, la web y el plugin de ChatGPT. El proyecto nació en [kathennn/stream-clip-maker](https://github.com/kathennn/stream-clip-maker) y todo su historial está aquí.
-- **[lecodev-26](https://github.com/lecodev-26)** mejoró la experiencia del menú de terminal.
+- **Manuel ([@lecodev-26](https://github.com/lecodev-26))**, creador de [stream-clip-maker](https://github.com/kathennn/stream-clip-maker), hizo el menú guiado de terminal, la app de escritorio, la búsqueda en Twitch, los subtítulos y el título, la subida privada a YouTube, la web y el plugin de ChatGPT. Sus commits (hechos desde sus cuentas @lecodev-26 y @kathennn) conservan aquí todo su historial.
 - **[Aplicando La IA](https://aplicandolaia.com)** escribió el detector original de chat-clips (`chat-clips.mjs`), del que partió Stream Clip Maker, y mantiene este repositorio.
 
 ## Licencia

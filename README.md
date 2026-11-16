@@ -66,7 +66,7 @@ A sudden flood of emotes. Everyone typing at once. A reaction spike you don't wa
 
 ## Desktop downloads — v0.1.0
 
-Desktop installers for Linux x64 and Windows x64. The v0.1.0 builds were published by kathennn in the [original repository](https://github.com/kathennn/stream-clip-maker); later releases will come from this one.
+Desktop installers for Linux x64 and Windows x64. The v0.1.0 builds were published by Manuel in the [original repository](https://github.com/kathennn/stream-clip-maker); later releases will come from this one.
 
 | Platform | Package | Direct download |
 | --- | --- | --- |
@@ -258,8 +258,7 @@ Bug reports, feature requests, and pull requests are welcome. Please include rep
 
 ## Authors
 
-- **[kathennn](https://github.com/kathennn)** built Stream Clip Maker: the guided terminal menu, the desktop app, Twitch discovery, captions and title, private YouTube upload, the website and the ChatGPT plugin. The project started in [kathennn/stream-clip-maker](https://github.com/kathennn/stream-clip-maker) and its full history lives here.
-- **[lecodev-26](https://github.com/lecodev-26)** improved the guided terminal experience.
+- **Manuel ([@lecodev-26](https://github.com/lecodev-26))**, creator of [stream-clip-maker](https://github.com/kathennn/stream-clip-maker), built the guided terminal menu, the desktop app, Twitch discovery, captions and title, private YouTube upload, the website and the ChatGPT plugin. All commits from @lecodev-26 and @kathennn (both Manuel's accounts) keep their full history here.
 - **[Aplicando La IA](https://aplicandolaia.com)** wrote the original chat-clips detector (`chat-clips.mjs`) that Stream Clip Maker started from, and maintains this repository.
 
 ## License
