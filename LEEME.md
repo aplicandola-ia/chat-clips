@@ -153,6 +153,17 @@ Los canales encontrados **no quedan autorizados automáticamente**. Solo los cre
 
 El uploader exige la opción explícita `--confirm-rights`, solo acepta archivos terminados en `_final.mp4`, comprueba la resolución 1080×1920 y la duración máxima de 180 segundos, y sube los vídeos como privados. Revisa el clip, los permisos del creador, el título y la descripción antes de publicar.
 
+## Plugins para ChatGPT
+
+El repositorio incluye dos paquetes de plugins de instrucciones listos para importar:
+
+- [Asistente Stream Clip Maker — ZIP](plugins/stream-clip-maker-assistant.zip): guía a ChatGPT en la instalación, análisis de chats de Twitch/YouTube, uso de la app de escritorio y TUI, renderizado y solución de problemas.
+- [Guía Remote Desktop Commander — ZIP](plugins/remote-desktop-commander-guide.zip): explica conexión de dispositivos, terminal, archivos, Git/despliegues y seguridad.
+
+Para usarlos con ChatGPT, descarga el ZIP e impórtalo mediante Plugin Creator o el flujo de importación de plugins disponible en tu cuenta. Cuando esté guardado, selecciona el plugin en una conversación y describe la tarea.
+
+**Importante:** son plugins de instrucciones/skills, no servidores de ejecución remota. La guía de Remote Desktop Commander no concede acceso al ordenador. Conecta por separado la integración oficial de Remote Desktop Commander y autoriza tu dispositivo; después utiliza la guía junto a esa integración. Consulta las carpetas de cada plugin para ver todos los detalles.
+
 ## Desarrollo
 
 ```bash
