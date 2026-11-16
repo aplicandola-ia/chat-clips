@@ -27,7 +27,7 @@ jobs:
             node_arch: x64
             args: ""
           - name: macOS Apple Silicon
-            runner: macos-15
+            runner: macos-26
             os: macos
             node_arch: arm64
             rust_target: aarch64-apple-darwin
@@ -69,7 +69,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          architecture: x64
+          architecture: ${{ matrix.node_arch }}
           cache: npm
 
       - name: Install JavaScript dependencies
