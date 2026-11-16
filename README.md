@@ -229,14 +229,13 @@ Review the clip, creator permissions, title, and description before publishing.
 
 ## ChatGPT plugins
 
-The repository includes two ready-to-import, skills-only plugin packages:
+The repository includes a ready-to-import, skills-only plugin package:
 
 - [Stream Clip Maker assistant — ZIP](plugins/stream-clip-maker-assistant.zip): helps ChatGPT guide installation, Twitch/YouTube chat analysis, desktop and TUI use, rendering and troubleshooting.
-- [Remote Desktop Commander Guide — ZIP](plugins/remote-desktop-commander-guide.zip): explains device connection, terminal sessions, file operations, Git/deployment workflows and security.
 
-To use one with ChatGPT, download its ZIP and add it through Plugin Creator / the plugin import flow available in your ChatGPT account. Once saved, select the plugin in a conversation and describe the task.
+To use it with ChatGPT, download the ZIP and add it through Plugin Creator / the plugin import flow available in your ChatGPT account. Once saved, select the plugin in a conversation and describe the task.
 
-**Important:** these are instruction/skill plugins, not remote execution servers. The Remote Desktop Commander Guide does not grant computer access. Connect the official Remote Desktop Commander integration separately, authorize your device, and then use the guide alongside it. See the plugin folders for full instructions.
+**Important:** this is an instruction/skill plugin, not a remote execution server. It does not grant access to your computer.
 
 ## Development
 
