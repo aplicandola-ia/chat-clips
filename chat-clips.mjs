@@ -256,7 +256,8 @@ function main() {
   mkdirSync(opts.out, { recursive: true });
   const momentsPath = join(opts.out, "moments.json");
   const mediaPaths = opts.run ? moments.flatMap((m, k) => outputPathsFor(m, k, opts)) : [];
-  assertOutputsAvailable([momentsPath, ...mediaPaths]);
+  // The report is regenerable; only media files need no-overwrite protection.
+  assertOutputsAvailable(mediaPaths);
   const all = [];
   moments.forEach((m, k) => {
     console.log(`#${k + 1}  ${hms(m.start)} → ${hms(m.end)}   peak ${hms(m.peak)}   ` +
@@ -267,8 +268,8 @@ function main() {
     all.push(...cmds);
     console.log();
   });
-  // wx is atomic: a concurrent process cannot silently replace this report.
-  writeFileSync(momentsPath, JSON.stringify({ source: basename(file), options: opts, moments }, null, 2), { flag: "wx" });
+  // moments.json is a regenerable report, so preview and --run can share an output folder.
+  writeFileSync(momentsPath, JSON.stringify({ source: basename(file), options: opts, moments }, null, 2));
   console.log("moments saved to " + momentsPath);
 
   if (opts.run) {

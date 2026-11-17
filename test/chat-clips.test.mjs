@@ -41,7 +41,7 @@ test("detects a synthetic chat spike and writes a reviewable moments file", (t) 
   assert.equal(report.moments[0].messages, 5);
 });
 
-test("refuses to replace an existing moments.json", (t) => {
+test("regenerates an existing moments.json report", (t) => {
   const dir = mkdtempSync(join(tmpdir(), "stream-clip-test-"));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   const chat = fixtureChat(dir);
@@ -50,9 +50,37 @@ test("refuses to replace an existing moments.json", (t) => {
   const report = join(out, "moments.json");
   writeFileSync(report, "keep this report\n");
   const result = run(chat, out);
-  assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /refusing to overwrite existing output/i);
-  assert.equal(readFileSync(report, "utf8"), "keep this report\n");
+  assert.equal(result.status, 0, result.stderr);
+  const regenerated = JSON.parse(readFileSync(report, "utf8"));
+  assert.equal(regenerated.source, "chat.json");
+  assert.equal(regenerated.moments.length, 1);
+});
+
+test("supports preview then --run in the same output folder", (t) => {
+  const dir = mkdtempSync(join(tmpdir(), "stream-clip-test-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const chat = fixtureChat(dir);
+  const out = join(dir, "out");
+
+  const preview = run(chat, out);
+  assert.equal(preview.status, 0, preview.stderr);
+  const report = join(out, "moments.json");
+  assert.ok(existsSync(report), "preview should create moments.json");
+
+  const inputVideo = join(dir, "input.mp4");
+  writeFileSync(inputVideo, "fake input video");
+  const bin = join(dir, "bin");
+  mkdirSync(bin);
+  const fakeFfmpeg = join(bin, "ffmpeg");
+  writeFileSync(fakeFfmpeg, "#!/bin/sh\nfor arg do output=\"$arg\"; done\nprintf generated > \"$output\"\n");
+  chmodSync(fakeFfmpeg, 0o755);
+  const env = { ...process.env, PATH: bin + ":" + (process.env.PATH || "") };
+
+  const execution = run(chat, out, ["--video", inputVideo, "--run"], env);
+  assert.equal(execution.status, 0, execution.stderr);
+  const regenerated = JSON.parse(readFileSync(report, "utf8"));
+  assert.equal(regenerated.options.run, true);
+  assert.ok(existsSync(join(out, "clip_01_00-00-30.mp4")));
 });
 
 test("preflights media outputs before running tools and preserves existing clips", (t) => {
