@@ -8,9 +8,10 @@
 //   node chat-clips.mjs video.live_chat.json --url https://youtu.be/XXXX
 //   node chat-clips.mjs chat.json --video stream.mp4 --run --out clips
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, realpathSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { join, basename } from "node:path";
+import { join, basename, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const HELP = `stream-clip-maker <chat-file> [options]
 
@@ -214,14 +215,29 @@ function commandsFor(m, k, o) {
   if (o.vod) {
     cmds.push(["TwitchDownloaderCLI", "videodownload", "--id", o.vod, "-b", hms(m.start), "-e", hms(m.end), "-q", "1080p60", "-o", raw]);
   } else if (o.url) {
-    cmds.push(["yt-dlp", "--download-sections", `*${hms(m.start)}-${hms(m.end)}`, "--force-keyframes-at-cuts", "-f", "bv*[height<=1080]+ba/b", "--merge-output-format", "mp4", "-o", raw, o.url]);
+    cmds.push(["yt-dlp", "--no-overwrites", "--download-sections", `*${hms(m.start)}-${hms(m.end)}`, "--force-keyframes-at-cuts", "-f", "bv*[height<=1080]+ba/b", "--merge-output-format", "mp4", "-o", raw, o.url]);
   } else if (o.video) {
-    cmds.push(["ffmpeg", "-y", "-ss", hms(m.start), "-to", hms(m.end), "-i", o.video, "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", raw]);
+    cmds.push(["ffmpeg", "-n", "-ss", hms(m.start), "-to", hms(m.end), "-i", o.video, "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", raw]);
   }
   if (o.vertical && cmds.length) {
-    cmds.push(["ffmpeg", "-y", "-i", raw, "-filter_complex", VERTICAL, "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "copy", join(o.out, `${name}_9x16.mp4`)]);
+    cmds.push(["ffmpeg", "-n", "-i", raw, "-filter_complex", VERTICAL, "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "copy", join(o.out, `${name}_9x16.mp4`)]);
   }
   return cmds;
+}
+
+function outputPathsFor(m, k, o) {
+  const name = `clip_${String(k + 1).padStart(2, "0")}_${hms(m.peak).replaceAll(":", "-")}`;
+  if (!o.vod && !o.url && !o.video) return [];
+  const paths = [join(o.out, `${name}.mp4`)];
+  if (o.vertical) paths.push(join(o.out, `${name}_9x16.mp4`));
+  return paths;
+}
+
+function assertOutputsAvailable(paths) {
+  const existing = paths.filter((path) => existsSync(path));
+  if (existing.length) {
+    throw new Error(`refusing to overwrite existing output(s): ${existing.join(", ")}. Choose another --out directory or move the files first`);
+  }
 }
 
 const quote = (a) => (/^[\w./:=@+-]+$/.test(a) ? a : `"${a.replaceAll('"', '\\"')}"`);
@@ -238,6 +254,10 @@ function main() {
   console.log(`${msgs.length} messages · ${dur} of stream · ${moments.length} moments\n`);
 
   mkdirSync(opts.out, { recursive: true });
+  const momentsPath = join(opts.out, "moments.json");
+  const mediaPaths = opts.run ? moments.flatMap((m, k) => outputPathsFor(m, k, opts)) : [];
+  // The report is regenerable; only media files need no-overwrite protection.
+  assertOutputsAvailable(mediaPaths);
   const all = [];
   moments.forEach((m, k) => {
     console.log(`#${k + 1}  ${hms(m.start)} → ${hms(m.end)}   peak ${hms(m.peak)}   ` +
@@ -248,8 +268,9 @@ function main() {
     all.push(...cmds);
     console.log();
   });
-  writeFileSync(join(opts.out, "moments.json"), JSON.stringify({ source: basename(file), options: opts, moments }, null, 2));
-  console.log(`moments saved to ${join(opts.out, "moments.json")}`);
+  // moments.json is a regenerable report, so preview and --run can share an output folder.
+  writeFileSync(momentsPath, JSON.stringify({ source: basename(file), options: opts, moments }, null, 2));
+  console.log("moments saved to " + momentsPath);
 
   if (opts.run) {
     if (!all.length) { console.error("--run needs --vod, --url or --video"); process.exit(1); }
@@ -265,4 +286,8 @@ function main() {
   }
 }
 
-try { main(); } catch (e) { console.error(`stream-clip-maker: ${e.message}`); process.exit(1); }
+export { parseArgs, fromTwitch, fromYouTube, scoreWindows, pickMoments, commandsFor, outputPathsFor, assertOutputsAvailable };
+
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(resolve(process.argv[1]))).href) {
+  try { main(); } catch (e) { console.error("stream-clip-maker: " + e.message); process.exit(1); }
+}
